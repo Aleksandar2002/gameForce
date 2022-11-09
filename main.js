@@ -28,16 +28,11 @@ const sectionProducts = document.querySelector('section.products');
 let prodNamesArr = new Array('Kick advanced gaming mouse' ,'Roccat XP Wireless Gaming Mouse' , 'Huano Kyocin Gaming Mouse' , 'Razer deathstalker V2 PRO' , 'Razer a32 gaming keyboard' , 'APX mechanical keyboard' , 'JBL quantum stereo microphone', 'Asus TF2 gaming monitor' , 'Onikuma K210 PRO wired')
 let prodPricesArr = new Array(33, 40, 25, 100 , 120 ,80,20 , 240 , 80);
 let imgSrcsArr = new Array('mouse1' , 'mouse2' , 'mouse3' , 'key1' , 'key2' , 'key3' , 'micro1' , 'monitor1'  ,'heads1');
+let prodTypesArr = new Array('mouse' , 'mouse' , 'mouse' , 'keyboard' , 'keyboard' , 'keyboard' , 'microphone' , 'monitor'  ,'headphone');
 let productsArr = new Array();
 
 createProductsArr();
-createProducts(productsArr)
-function Product(name , src , price){
-    this.name = name;
-    this.imgSrc = src;
-    this.price = price;
-    this.createProducts = createProducts;
-}
+createProductsArticle(productsArr)
 
 // CREATE HEADER NAV LIST
 const headerNavbar = document.querySelector('header .navbar nav');
@@ -55,14 +50,14 @@ let socialLinksHref = new Array('instagram' , 'github' , 'twitter' , 'facebook',
 createSocialNetworkList( socialNetworkDiv , socialLinksContent , socialLinksHref );
 
 // CREATE FILTER CHECKBOXES
-let checkboxForm = document.querySelector('.filter form .check-boxes');
-let labelsTextContent = new Array('Mouse' , 'Keyboard' , 'Monitor' , 'Headphones' , 'Microphone');
+let checkboxForm = document.querySelector('.filter form .checkboxes');
+let labelsTextContent = new Array('Mouse' , 'Keyboard' , 'Monitor' , 'Headphone' , 'Microphone');
 createFilterCheckBoxes( checkboxForm , labelsTextContent );
 
 // CREATE SORT SELECT OPTIONS
 let selectTag = document.querySelector('.sortSelect');
 let optValues = new Array('null' , 'ascPrice', 'descPrice' , 'ascName', 'descName');
-let optText = new Array('Sort order' , 'Ascending price', 'Descending price' , 'Ascending name', 'Descending name');
+let optText = new Array('Default sort order' , 'Ascending price', 'Descending price' , 'Ascending name', 'Descending name');
 createSortOptions( selectTag , optValues ,optText );
 
 // SEARCH INPUT
@@ -95,25 +90,30 @@ searchBtn.addEventListener('click', (e)=>{
         document.querySelector('.products p').classList.add('visible');
     }
     // DODAVANJE SVIH PROIZVODE U SECTION
-    createProducts(filterProductsArr);
+    createProductsArticle(filterProductsArr);
     // console.log(filterProductsArr);
 })
 
 // MAKING POPUP CART VISIBLE
 const cartBtn = document.querySelector('header .shopping-cart');
 const popupCart = document.querySelector('.popup-cart');
+const somethingIsInCartSpan = document.querySelector('.somethingIsInCart')
 let productNum = totalPrice = 0; // THIS IS USED IN ADDTOCART FUNCTION
+
 cartBtn.addEventListener('click', (e)=>{
     e.preventDefault();
     popupCart.classList.add('visible');
     document.body.style.overflow = 'hidden';
 })
+
 // HIDDING POPUP IF USER CLICKS ON CLOSEBTN
-const closeCartBtn = document.querySelector('.popup-cart #closeBtn')
+const closeCartBtn = document.querySelector('.popup-cart #closeBtn');
+
 closeCartBtn.addEventListener('click',()=>{
     popupCart.classList.remove('visible');
     document.body.style.overflow = 'inherit';
 })
+
 // REMOVING CART IF USER CLICKS ON THE BACKGROUND
 popupCart.addEventListener('click', (e)=>{
     let clickedEl = e.target.classList;
@@ -123,20 +123,61 @@ popupCart.addEventListener('click', (e)=>{
             document.body.style.overflow = 'inherit';
         }
     }
-}) 
+})
+
+// SORTING PRODUCTS
+let cloneProdArr = [...productsArr]
+selectTag.addEventListener('change', (e)=>{
+    let currentOptionValue = e.target.value;
+    switch ( currentOptionValue ){
+        case 'ascPrice': sortProductsByPrice('asc');break;
+        case 'descPrice': sortProductsByPrice('desc');break;
+        case 'ascName': sortProductsByNames('asc');break;
+        case 'descName': sortProductsByNames('desc');break;
+        default: productsArr = [...cloneProdArr];
+    }
+    createProductsArticle(productsArr);
+})
+
+// FILTER
+let filterDiv = document.querySelector('#filter');
+let typeCheckboxes = Array.from(filterDiv.querySelectorAll('.checkboxes input'));
+typeCheckboxes.forEach(checkbox =>{
+    checkbox.addEventListener('click' , e=>{
+        let checkboxValue = e.target.getAttribute('value');
+        productsArr = productsArr.filter(product=>{
+            if(product.type.toLowerCase() === checkboxValue.toLowerCase())return product;
+        })
+        createProductsArticle(productsArr);
+    })
+})
+
+
+
+// FUNCTIONS
+function Product(name , src , price ,type){
+    this.name = name;
+    this.imgSrc = src;
+    this.price = price;
+    this.type = type;
+    this.createProductsArticle = createProductsArticle;
+}
 function createProductsArr() {
     for(let i = 0; i< prodNamesArr.length ; i++){
-        productsArr[i] = new Product(prodNamesArr[i] , imgSrcsArr[i],  prodPricesArr[i])
+        productsArr[i] = new Product(prodNamesArr[i] , imgSrcsArr[i],  prodPricesArr[i], prodTypesArr[i])
     }
 }
-function createProducts(productsArr) {
+function createProductsArticle(productsArr) {
+
     for(let articleProduct of document.querySelectorAll('.product')){
         articleProduct.remove();
     }
+
     productsArr.forEach(product =>{
         // CREATING ALL ELEMENTS OF SINGLE PRODUCT ARTICLE
         let article = document.createElement('article');
         article.classList.add('product');
+        article.setAttribute('data-content', product.type);
         let figure = document.createElement('figure');
         let img = document.createElement('img');
         img.alt = product.name;
@@ -153,7 +194,19 @@ function createProducts(productsArr) {
         button.classList.add('addToCart');
         button.setAttribute('onclick' , 'addToCart(event)')
         button.textContent = 'Add to cart';
-    
+
+        //  DISABLE BUTTON IF THAT PRODUCT IS IN CART LIST
+        let popupCartLis = Array.from(document.querySelectorAll('.popup-cart li'));
+        let isSome = popupCartLis.some(el=>{
+            let productNameFromList = el.querySelector('[data-content="productName"]').textContent;
+            if(productNameFromList.toLowerCase() === product.name.toLowerCase()){
+                return true;
+            }
+        })
+        if(isSome) {
+            disableAddToCartBtn(button);
+        }
+
         // ADDING ELEMENTS TO THEIR PARENT
         figure.appendChild(img);
         figure.appendChild(h3);
@@ -171,16 +224,19 @@ function createNavList(parentNav) {
         let a = document.createElement('a');
         link = link.trim();
         a.textContent = link;
+
         if(link.indexOf(' ') !== -1){
             link = link.split(' ').join('');
         }
         let winLoc = window.location.href;
         winLoc = winLoc.substring((winLoc.lastIndexOf('/')+1))
+        
         if(winLoc === ''){
             winLoc = 'index.html';
         }
         winLoc = winLoc.split('.')[0];
         link = (link === 'Home')?'index':link;
+
         if(link.toLowerCase() === winLoc){
             a.classList.add('active');
         }
@@ -192,6 +248,7 @@ function createNavList(parentNav) {
 }
 function createSocialNetworkList(parentDiv , contentList , hrefList) {
         let ul = document.createElement('ul');
+
         for(let i = 0 ; i<contentList.length; i++){
             let li = document.createElement('li');
             let a = document.createElement('a');
@@ -237,28 +294,15 @@ function addToCart(e){
     let cartLis = cartUl.children;
     let ind = false;
 
-    if(productNum){
+    // DISABLE ADDTOCART BTN
+    let addToCartBtn = e.target;
+    disableAddToCartBtn(addToCartBtn);
 
-        for(let i = 0;i< cartLis.length;i++){
-            currentProdName = cartLis[i].querySelector('[data-content="productName"]').textContent;
-            // AKO JE PRODUCT DODAT U LISTU ON SE NE DODAJE OPET , VEC SE SAMO POVECAVA NJEGOV INPUT QUANTITY
-            if(currentProdName === productName){
-                ind = true;
-                cartLis[i].querySelector('.quantity').value = +cartLis[i].querySelector('.quantity').value+ 1;
-            }
-        }
-        // AKO TAJ ELEMENT NIJE VEC DODAT U LISTU ON SE DODAJE
-        if(!ind){
-            createProductInCartList(productName ,  productPrice , cartUl);
-        }
+    createProductInCartList(productName ,  productPrice , cartUl);
 
-    }else{
-        createProductInCartList(productName ,  productPrice , cartUl);
-    }
     productNum++;
     totalPrice += +productPrice.substring(1);
-    popupCart.querySelector('.totalPrice').textContent = '$'+totalPrice;
-    document.querySelector('.productsNum').textContent = productNum;
+    updateShoppingCartInterface();
 }
 function createProductInCartList(name ,price ,list){
 
@@ -278,7 +322,7 @@ function createProductInCartList(name ,price ,list){
     input.setAttribute('min' , '1');
     input.setAttribute('max' , '20');
     input.setAttribute('onkeydown' , 'return false');
-    input.setAttribute('onchange', 'changeProductsNumberInCartList(event)');
+    input.setAttribute('onchange', 'changeProductsNumberAndPriceInCartList(event)');
     let button = document.createElement('button');
     button.innerHTML = '<i class="fas fa-trash"></i>';
     button.classList.add('deleteBtn');
@@ -291,33 +335,103 @@ function createProductInCartList(name ,price ,list){
     li.appendChild(button);
     list.appendChild(li);
 }
-function changeProductsNumberInCartList(e){
+function changeProductsNumberAndPriceInCartList(e){
     let quantInputs = popupCart.querySelectorAll('.quantity');
     productNum= totalPrice = 0;
+
     quantInputs.forEach(quant =>{
         productNum += +quant.value;
         let parentLi = quant.parentElement;
-        console.log(parentLi);
         let currentProductPrice = parentLi.querySelector('[data-content="price"]').textContent.substring(1);
-        console.log(quant.value);
-        console.log(currentProductPrice);
         totalPrice += quant.value * currentProductPrice;
     })
-    popupCart.querySelector('.totalPrice').textContent = '$'+totalPrice;
-    popupCart.querySelector('.productsNum').textContent = productNum;
-    // let parentLi = e.target.parentElement;
-    // let currentProductPrice = parentLi.querySelector('[data-content="price"]').textContent.substring(1);
-    // let previousQuantity = --parentLi.querySelector('.quantity').textContent;  
-    // totalPrice = popupCart.querySelector('.totalPrice').textContent.substring(1);
-    // totalPrice = 
-    // popupCart.querySelector('.totalPrice').textContent = +totalPrice;
-    // totalPrice = +parentLi.querySelector('[data-content="price"]').textContent;
-
-
-
+    updateShoppingCartInterface();
 }
 function deleteProductFromCartList(e){
     e.preventDefault();
-    let parentDiv =  e.target.closest('li');
-    parentDiv.remove();
+
+    let deletedProductLi =  e.target.closest('li');
+    let deletedProductQuantity = deletedProductLi.querySelector('.quantity').value;
+    let deletedProductPrice = deletedProductLi.querySelector('[data-content="price"]').textContent.substring(1);
+    let deletedProductName = deletedProductLi.querySelector('[data-content="productName"]').textContent;
+    
+    productNum -= +deletedProductQuantity;
+    totalPrice -= (+deletedProductQuantity * +deletedProductPrice);
+    updateShoppingCartInterface();
+    
+    deletedProductLi.remove();
+    
+    // ENABLE ADD TO CART BUTTON AND REMOVE CLASS
+    let allArticlesInProductSection = sectionProducts.querySelectorAll('.product');
+    allArticlesInProductSection = Array.from(allArticlesInProductSection);
+
+    let articleWithSameProdAsDeletedProd = allArticlesInProductSection.find(article =>{
+        let prodName = article.querySelector('.product-name').textContent;
+        if(prodName === deletedProductName)return article;
+    })
+
+    if(articleWithSameProdAsDeletedProd){
+        let addToCartBtn = articleWithSameProdAsDeletedProd.querySelector('.addToCart');
+        enableAddToCartBtn(addToCartBtn);
+    }
+}
+function updateShoppingCartInterface(){
+    popupCart.querySelector('.totalPrice').textContent = '$'+totalPrice;
+    document.querySelector('.productsNum').textContent = productNum;
+
+    if(productNum){
+        somethingIsInCartSpan.classList.add('visible');
+        somethingIsInCartSpan.textContent = productNum;
+    }else{
+        somethingIsInCartSpan.classList.remove('visible');
+        somethingIsInCartSpan.textContent = '';
+    }
+}
+function sortProductsByNames(sortType){
+    if(sortType === 'asc'){
+        productsArr.sort((a , b)=>{
+            let aName = a.name.toLowerCase();
+            let bName = b.name.toLowerCase();
+            if(aName > bName){
+                return 1;
+            }
+            if(bName > aName){
+                return -1;
+            }
+            return 0
+        });
+    }else{
+        productsArr.sort((a , b)=>{
+            let aName = a.name.toLowerCase();
+            let bName = b.name.toLowerCase();
+            if(aName > bName){
+                return -1;
+            }
+            if(bName > aName){
+                return 1;
+            }
+            return 0
+        });
+    }
+}
+function sortProductsByPrice(sortType){
+    if(sortType === 'asc'){
+        productsArr.sort((a , b)=>{
+            return a.price - b.price;
+        })
+    } else {
+        productsArr.sort((a , b)=>{
+            return b.price - a.price;
+        })
+    }
+}
+function disableAddToCartBtn(button){
+    button.classList.add('added');
+    button.disabled = true;
+    button.textContent = 'Added';
+}
+function enableAddToCartBtn(button){
+    button.classList.remove('added');
+    button.disabled = false;
+    button.textContent = 'Add to cart';
 }

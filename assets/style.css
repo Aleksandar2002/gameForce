@@ -226,6 +226,7 @@ html body header .row .col .shopping-cart {
   margin-left: 30px;
   font-size: 1.3rem;
   border-radius: 4px;
+  position: relative;
   border: 1px solid #FC7753;
   -webkit-box-shadow: 0 0 2px #FC7753;
           box-shadow: 0 0 2px #FC7753;
@@ -236,6 +237,32 @@ html body header .row .col .shopping-cart:hover {
   color: #403D58;
   -webkit-transform: scale(1.1);
           transform: scale(1.1);
+}
+
+html body header .row .col .shopping-cart .somethingIsInCart {
+  width: 6px;
+  font-size: .8rem;
+  padding: 9px;
+  height: 15px;
+  border-radius: 4px;
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #66D7D1;
+  color: #2D3047;
+  display: none;
+}
+
+html body header .row .col .shopping-cart .somethingIsInCart.visible {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
 }
 
 html body .main {
@@ -612,6 +639,11 @@ html body .main .container-fluid .wrapper section.products article.product foote
 html body .main .container-fluid .wrapper section.products article.product footer button:hover {
   background-color: #FC7753;
   color: #2D3047;
+}
+
+html body .main .container-fluid .wrapper section.products article.product footer button.added {
+  background-color: #FC7753;
+  color: #403D58;
 }
 
 html body .footer {

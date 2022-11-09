@@ -31,7 +31,7 @@
                     <input type="search" name="search-input" class="search-input" placeholder="Search..."/>
                     <button class="search-btn"><i class="zmdi zmdi-search"></i></button>
                 </form>
-                <button class="shopping-cart"><i class="zmdi zmdi-shopping-cart"></i></button>
+                <button class="shopping-cart"><i class="zmdi zmdi-shopping-cart"></i><span class="somethingIsInCart"></span></button>
             </div>
         </div>
     </header>
@@ -99,7 +99,7 @@
                     <form action="stranica.php" method="POST">
                         <p>Product type:</p>
                         <hr/>
-                        <div class="check-boxes">
+                        <div class="checkboxes">
                         </div>
                         <p>Select price</p>
                         <hr/>
@@ -168,7 +168,7 @@
             <p>Number of products: <span class="productsNum">0</span></p>
             <ul>
             </ul>
-            <p>Total price: <span class="totalPrice">0</span></p>
+            <p>Total price: &nbsp;<span class="totalPrice">0</span></p>
             <button id="buyBtn">Buy Products</button>
             <button id="closeBtn"><i class="fas fa-plus"></i></button>
         </div>
