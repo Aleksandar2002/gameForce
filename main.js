@@ -1,23 +1,38 @@
 
 // CHANGE SLIDER IMAGE
-let leftArrow = document.querySelector('.left');
-let rightArrow = document.querySelector('.right');
-let slideImage = document.querySelector('.slide');
-let currentImage = 1;
-if(leftArrow){
-    leftArrow.addEventListener('click', ()=>{
-        currentImage--;
-        if(currentImage === 0){
-            currentImage = 3;
+let previousBtn = document.querySelector('#previousBtn');
+let nextBtn = document.querySelector('#nextBtn');
+let slideImages = document.querySelectorAll('.slide');
+
+slideImages.forEach((slide , index) =>{
+    slide.style.transform = `translateX(${index * 100}%)`;
+    slide.style.backgroundImage = `url("assets/img/slider/slideImg${index+1}.jpg")`;
+})
+let currentImage = minSlide = maxSlide = 0;
+maxSlide = slideImages.length-1;
+
+if(previousBtn){
+    previousBtn.addEventListener('click', ()=>{
+        if(currentImage === minSlide){
+            currentImage = maxSlide;
+        }else{
+            currentImage--;
         }
-        slideImage.style.backgroundImage = `url("assets/img/slider/slideImg${currentImage}.jpg")`;
+        slideImages.forEach((slide, index) =>{
+            slide.style.transform = `translateX(${100 * (index - currentImage)}%)`;
+            slide.style.transition = '.5s ease-in-out';
+        })
     })
-    rightArrow.addEventListener('click', ()=>{
-        currentImage++;
-        if(currentImage === 4){
-            currentImage = 1
+    nextBtn.addEventListener('click', ()=>{
+        if(currentImage === maxSlide){
+            currentImage = 0;
+        }else{
+            currentImage++;
         }
-        slideImage.style.backgroundImage = `url("assets/img/slider/slideImg${currentImage}.jpg")`;
+        slideImages.forEach((slide, index) =>{
+            slide.style.transform = `translateX(${100 * (index - currentImage)}%)`;
+            slide.style.transition = '.5s ease-in-out';
+        })
     })
 }
 
@@ -33,6 +48,7 @@ let productsArr = new Array();
 
 createProductsArr();
 createProductsArticle(productsArr)
+let cloneProdArr = [...productsArr];
 
 // CREATE HEADER NAV LIST
 const headerNavbar = document.querySelector('header .navbar nav');
@@ -40,30 +56,30 @@ let navLinks = new Array('Home' , 'Services' , 'Contact' , 'About us' , 'Author'
 createNavList(headerNavbar);
 
 // CREATE FOOTER NAV LIST
-let footerNavbar = document.querySelector('.footer .navbar nav')
+const footerNavbar = document.querySelector('.footer .navbar nav')
 createNavList(footerNavbar)
 
 //SOCIAL NETWORK LIST
-let socialNetworkDiv = document.querySelector('.social-networks')
+const socialNetworkDiv = document.querySelector('.social-networks')
 let socialLinksContent = new Array('<i class="fab fa-instagram"></i>' ,'<i class="zmdi zmdi-github-alt"></i>' ,'<i class="zmdi zmdi-twitter"></i>' , '<i class="zmdi zmdi-facebook"></i>' , '<i class="zmdi zmdi-youtube-play"></i>', '<i class="zmdi zmdi-linkedin"></i>');
 let socialLinksHref = new Array('instagram' , 'github' , 'twitter' , 'facebook', 'youtube', 'linkedin');
 createSocialNetworkList( socialNetworkDiv , socialLinksContent , socialLinksHref );
 
 // CREATE FILTER CHECKBOXES
-let checkboxForm = document.querySelector('.filter form .checkboxes');
+const checkboxForm = document.querySelector('.filter form .checkboxes');
 let labelsTextContent = new Array('Mouse' , 'Keyboard' , 'Monitor' , 'Headphone' , 'Microphone');
 createFilterCheckBoxes( checkboxForm , labelsTextContent );
 
 // CREATE SORT SELECT OPTIONS
-let selectTag = document.querySelector('.sortSelect');
+const selectTag = document.querySelector('.sortSelect');
 let optValues = new Array('null' , 'ascPrice', 'descPrice' , 'ascName', 'descName');
 let optText = new Array('Default sort order' , 'Ascending price', 'Descending price' , 'Ascending name', 'Descending name');
 createSortOptions( selectTag , optValues ,optText );
 
 // SEARCH INPUT
-
 const searchInput = document.querySelector('.search-input');
 const searchBtn = document.querySelector('.search-btn');
+let isSearching = false;
 
 searchBtn.addEventListener('click', (e)=>{
     e.preventDefault();
@@ -73,13 +89,13 @@ searchBtn.addEventListener('click', (e)=>{
 
     let searchValue = searchInput.value;
     searchValue = ( searchValue.length > 3 )? searchValue.substring(0 , 3): searchValue;
-
+    isSearching = ( searchValue.trim().length === 0)?false : true;
     // UKLANJANJE PARAGRAFA
     document.querySelector('.products p').classList.remove('visible');
     document.querySelector('section.products').classList.remove('flexbox');
 
     // DA LI SE U OBJEKTU PRODUCT ,IZ NIZA PRODUCTS ARR, NALAZI VREDNOST SEARCH INPUTA
-    let filterProductsArr = productsArr.filter(product =>{
+    let filterProductsArr = cloneProdArr.filter(product =>{
         if(product.name.toLowerCase().search(searchValue.toLowerCase()) !== -1  ){
             return product;
         }
@@ -90,6 +106,7 @@ searchBtn.addEventListener('click', (e)=>{
         document.querySelector('.products p').classList.add('visible');
     }
     // DODAVANJE SVIH PROIZVODE U SECTION
+    productsArr = [...filterProductsArr];
     createProductsArticle(filterProductsArr);
     // console.log(filterProductsArr);
 })
@@ -126,7 +143,6 @@ popupCart.addEventListener('click', (e)=>{
 })
 
 // SORTING PRODUCTS
-let cloneProdArr = [...productsArr]
 selectTag.addEventListener('change', (e)=>{
     let currentOptionValue = e.target.value;
     switch ( currentOptionValue ){
@@ -139,17 +155,38 @@ selectTag.addEventListener('change', (e)=>{
     createProductsArticle(productsArr);
 })
 
-// FILTER
-let filterDiv = document.querySelector('#filter');
-let typeCheckboxes = Array.from(filterDiv.querySelectorAll('.checkboxes input'));
-typeCheckboxes.forEach(checkbox =>{
-    checkbox.addEventListener('click' , e=>{
-        let checkboxValue = e.target.getAttribute('value');
-        productsArr = productsArr.filter(product=>{
-            if(product.type.toLowerCase() === checkboxValue.toLowerCase())return product;
-        })
-        createProductsArticle(productsArr);
-    })
+// FILTER PRODUCTS
+const filterDiv = document.querySelector('#filter');
+const filterBtn = document.querySelector('#filterBtn');
+filterBtn.addEventListener('click' , (e)=>{
+    e.preventDefault();
+
+    // FILTER BY PRODUCT TYPES AND PRICE
+    const typeCheckboxes = Array.from(filterDiv.querySelectorAll('.checkboxes input:checked'));
+    const maxPriceInputValue = filterDiv.querySelector('[name="maxPrice"]').value;
+    const minPriceInputValue = filterDiv.querySelector('[name="minPrice"]').value;
+    var newProductArray = new Array;
+    if(typeCheckboxes.length){
+        for(let checkbox of typeCheckboxes){
+            let checkboxValue = checkbox.getAttribute('value');
+            if(isSearching){
+                productsArr.forEach(product =>{
+                    if(product.type === checkboxValue && (product.price >= minPriceInputValue && product.price <= maxPriceInputValue)){
+                        newProductArray.push(product);
+                    }
+                })
+            }   else{
+                cloneProdArr.forEach(product =>{
+                    if(product.type === checkboxValue && (product.price >= minPriceInputValue && product.price <= maxPriceInputValue)){
+                        newProductArray.push(product);
+                    }
+                })
+            }
+        }
+    }
+    productsArr = [...newProductArray];
+
+    createProductsArticle(newProductArray);
 })
 
 
@@ -268,6 +305,7 @@ function createFilterCheckBoxes(form , labelsText) {
         input.setAttribute('name', labelsText[i].toLowerCase());
         input.setAttribute('value', labelsText[i].toLowerCase());
         input.setAttribute('id', labelsText[i].toLowerCase());
+        // input.setAttribute('checked' , 'yes');
         let label = document.createElement('label');
         label.textContent = labelsText[i];
         label.setAttribute('for' , labelsText[i].toLowerCase());

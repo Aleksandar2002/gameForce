@@ -68,7 +68,7 @@ html{
             border: none;
         }
         .wrapper{
-            width: 72%;
+            width: 72vw;
             margin: 0 auto;
         }
         header{
@@ -195,24 +195,29 @@ html{
         .main{
             min-height: 100%;
             .container-fluid{
+                padding: 0;
                 .slider{
                     position: relative;
                     min-height: 500px;
+                    overflow: hidden;
+                    margin: 0;
+                    width: 100%;
+                    min-height: 500px;
+                    height: calc(100vh - 2 * 40px - 41px);
                     .col{
-                        &.hidden{
-                            display: none;
-                        }
                         width: 100%;
                         min-height: 500px;
                         height: calc(100vh - 2 * 40px - 41px);
                         background-image: url("img/slider/slideImg1.jpg");
                         background-position: center;
                         background-size: cover;
+                        position: absolute;
                         .slide-text{
                             position: absolute;
                             bottom: 15%;
+                            max-width: 600px;
                             right: 5%;
-                            z-index: 2;
+                            z-index: 22;
                             background-color: rgba(255,255 ,255 ,0.2);
                             border-radius: 5px;
                             padding: 30px;
@@ -220,41 +225,43 @@ html{
                             h1{
                                 color: $orange;
                                 @include header1();
+                                margin-bottom: 10px;
                             }
                             h2{
+                                line-height: 2rem;
                                 @include header2();
                                 color: $blue;
                             }
                         }
-                        .arrow button{
-                            background-color: transparent;
-                            font-size: 6rem;
-                            position: absolute;
-                            top: 40%;
-                            cursor: pointer;
-                            z-index: 2;
-                            &#leftArrowBtn{
-                                left: 2%;
-                            }
-                            &#rightArrowBtn{
-                                right: 2%;
-                            }
-                            i{
-                                color: $blue;
-                                @include transition();
-                            }
-                            i:hover{
-                                color: $orange;
-                            }
-                        }
-                        
                         .layer{
                             position: absolute;
                             top: 0;
                             width: 100%;
                             height: 100%;
+                            z-index: 1;
                             left: 0;
                             background-color: rgba(42,42,42,.247);
+                        }
+                    }
+                    .arrow button{
+                        background-color: transparent;
+                        font-size: 6rem;
+                        position: absolute;
+                        top: 40%;
+                        cursor: pointer;
+                        z-index: 2;
+                        &#previousBtn{
+                            left: 2%;
+                        }
+                        &#nextBtn{
+                            right: 2%;
+                        }
+                        i{
+                            color: $blue;
+                            @include transition();
+                        }
+                        i:hover{
+                            color: $orange;
                         }
                     }
                 }
@@ -296,7 +303,7 @@ html{
                             margin: 0 ;
                         }
                         form{
-                            width: calc( (100vw - 1180px) / 2 - 80px);
+                            width: calc( (100vw - 72vw) / 2 - 80px);
                             p{
                                 font-size: .9rem;
                                 margin: 12px 0 0 0 ;

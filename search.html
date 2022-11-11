@@ -5,280 +5,98 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Web prog 1</title>
-    <link rel="shortcut icon" href="#" type="image/x-icon"/>
-    <link rel="stylesheet" type="text/css" href="assets/style.css"/>
-    <link rel="stylesheet" type="text/css" href="assets/responsive.css"/>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css"/>
-    <link rel="preconnect" href="https://fonts.googleapis.com"/>
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@300;400;500&display=swap" rel="stylesheet"/> 
-    <script src="https://kit.fontawesome.com/86efb14479.js" crossorigin="anonymous"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            width: calc(100vw - 0);
+            height: 100vh;
+            background-color: rgb(121, 121, 121);
+        }
+        .container{
+            height: 100vh;
+            background-color: rebeccapurple;
+            overflow: hidden;
+            position: relative;
+        }
+        .slide{
+            width: 100%;
+            height: 100%;
+            background-color: rgb(56, 68, 68);
+            color: black;
+            border: 1px solid pink;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: aliceblue;
+            font-size: 2.5rem;
+            position: absolute;  
+            transition: .3s ease;  
+        }
+        /* .slide:nth-child(2){
+            left: 100%;
+        }
+        .slide:nth-child(3){
+            left: 200%;
+        } */
+        .left , .right{
+            position: absolute;
+            top: 47%;
+            color: red;
+            font-size: 2rem;
+            background-color: transparent;
+            border: none;
+            outline: none;
+            cursor: pointer;
+        }
+        .right{
+            right: 10px;
+        }
+        .left{
+            left: 10px;
+        }
+    </style>
 </head>
 <body>
-    <header class="container-fluid">
-        <div class="row wrapper">
-            <div class="col col-2 logo">
-                <a href="index.html"><img src="assets/img/logo.png" alt="Logo"/></a>
-            </div>
-            <div class="col col-6 navbar">
-                <nav>
-                    <ul>
-                        <li>
-                            <a href="index.html" class="active">Home</a>
-                        </li>
-                        <li>
-                            <a href="index.html">Services</a>
-                        </li>
-                        <li>
-                            <a href="index.html">Contact</a>
-                        </li>
-                        <li>
-                            <a href="index.html">About us</a>
-                        </li>
-                        <li>
-                            <a href="index.html">Author</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-            <div class="col col-4 search-cart">
-                <form action="stranica.php" method="POST" class="search-form">
-                    <input type="search" name="search-input" class="search-input" placeholder="Search..."/>
-                    <button class="search-btn"><i class="zmdi zmdi-search"></i></button>
-                </form>
-                <button class="shopping-cart"><i class="zmdi zmdi-shopping-cart"></i></button>
-            </div>
-        </div>
-    </header>
-    <div class="main">
-        <div class="container-fluid">
-        </div>
-        <div class="container-fluid">
-            <div class="filter">
-                <h3>Filters</h2>
-                <form action="stranica.php" method="POST">
-                    <p>Product type:</p>
-                    <hr/>
-                    <div class="checkBoxEl">
-                        <input type="checkbox" name="mouse" id="mouse" value="mouse"/>
-                        <label for="mouse">Mouse</label>
-                    </div>
-                    <div class="checkBoxEl">
-                        <input type="checkbox" name="keyboard" id="keyboard" value="keyboard"/>
-                        <label for="keyboard">Keyboard</label>
-                    </div>
-                    <div class="checkBoxEl">
-                        <input type="checkbox" name="monitor" id="monitor" value="keyboard"/>
-                        <label for="monitor">Monitor</label>
-                    </div>
-                    <div class="checkBoxEl">
-                        <input type="checkbox" name="headphones" id="headphones" value="headphones"/>
-                        <label for="headphones">Headphones</label>
-                    </div>
-                    <div class="checkBoxEl">
-                        <input type="checkbox" name="microphone" id="microphone" value="microphone"/>
-                        <label for="microphone">Microphone</label>
-                    </div>
-                    <p>Select price</p>
-                    <hr/>
-                    <div class="elementPrice">
-                        <label for="minPrice">Min price:</label>
-                        <input type="number"  name="minPrice" id="minPrice"/>
-                    </div>
-                    <div class="elementPrice">
-                        <label for="maxPrice">Max price:</label>
-                        <input type="number" name="maxPrice" id="maxPrice"/>
-                    </div>
-                    <div class="filterBtnDiv">
-                        <button id="filterBtn"><i class="zmdi zmdi-filter-list"></i> Filter</button>
-                    </div>
-                </form>
-            </div>
-            <div class="sort">
-                <form action="stranica.php" method="POST">
-                    <select name="sort" class="sortSelect">
-                        <option value="null">Sort order</option>
-                        <option value="ascPrice">Ascending price</option>
-                        <option value="descPrice">Descending price</option>
-                        <option value="ascName">Ascending name</option>
-                        <option value="descName">Descending name</option>
-                    </select>
-                </form>
-            </div>
-            <div class="wrapper" style="margin-top: 20px;">
-                <section class="products">
-                    <article class="product">
-                        <figure>
-                            <img src="assets/img/products/mouse1.png" alt="Kick advanced gaming mouse"/>
-                            <h3 class="product-name">Kick advanced gaming mouse</h3>
-                        </figure>
-                        <footer>
-                            <p class="price">$33</p>
-                            <button id="addToCart">Add to cart</button>
-                        </footer>
-                    </article>
-                    <article class="product">
-                        <figure>
-                            <img src="assets/img/products/mouse2.png" alt="Roccat gaming mouse"/>
-                            <h3 class="product-name">Roccat XP Wireless Gaming Mouse </h3>
-                        </figure>
-                        <footer>
-                            <p class="price">$40</p>
-                            <button id="addToCart">Add to cart</button>
-                        </footer>
-                    </article>
-                    <article class="product">
-                        <figure>
-                            <img src="assets/img/products/mouse3.png" alt="gaming Huano mouse"/>
-                            <h3 class="product-name">Huano Kyocin Gaming Mouse</h3>
-                        </figure>
-                        <footer>
-                            <p class="price">$25</p>
-                            <button id="addToCart">Add to cart</button>
-                        </footer>
-                    </article>
-                    <article class="product">
-                        <figure>
-                            <img src="assets/img/products/key1.png" alt="Razer keyboard V2"/>
-                            <h3 class="product-name">Razer deathstalker V2 PRO</h3>
-                        </figure>
-                        <footer>
-                            <p class="price">$100</p>
-                            <button id="addToCart">Add to cart</button>
-                        </footer>
-                    </article>
-                    <article class="product">
-                        <figure>
-                            <img src="assets/img/products/key2.png" alt="Razer keyboard"/>
-                            <h3 class="product-name">Razer a32 gaming keyboard</h3>
-                        </figure>
-                        <footer>
-                            <p class="price">$120</p>
-                            <button id="addToCart">Add to cart</button>
-                        </footer>
-                    </article>
-                    <article class="product">
-                        <figure>
-                            <img src="assets/img/products/key3.png" alt="Apx keyboard"/>
-                            <h3 class="product-name">APX mechanical keyboard</h3>
-                        </figure>
-                        <footer>
-                            <p class="price">$80</p>
-                            <button id="addToCart">Add to cart</button>
-                        </footer>
-                    </article>
-                    <article class="product">
-                        <figure>
-                            <img src="assets/img/products/micro1.png" alt="Gaming microphone JBL"/>
-                            <h3 class="product-name">JBL quantum stereo microphone</h3>
-                        </figure>
-                        <footer>
-                            <p class="price">$20</p>
-                            <button id="addToCart">Add to cart</button>
-                        </footer>
-                    </article>
-                    <article class="product">
-                        <figure>
-                            <img src="assets/img/products/monitor1.png" alt="Asus monitor"/>
-                            <h3 class="product-name">Asus TF2 gaming monitor</h3>
-                        </figure>
-                        <footer>
-                            <p class="price">$240</p>
-                            <button id="addToCart">Add to cart</button>
-                        </footer>
-                    </article>
-                    <article class="product">
-                        <figure>
-                            <img src="assets/img/products/heads1.png" alt="Onikuma headphones"/>
-                            <h3 class="product-name">Onikuma K210 PRO wired</h3>
-                        </figure>
-                        <footer>
-                            <p class="price">$80</p>
-                            <button id="addToCart">Add to cart</button>
-                        </footer>
-                    </article>
-                </section>
-            </div>
-                <!-- <section id="products">
-                    <article class="product">
-                        <figure>
-                            <img src="" alt="gaming mouse">
-                            <h3 class="product-name">Razer a32 gaming mouse, white</h3>
-                        </figure>
-                        <footer>
-                            <p class="price">$120</p>
-                            <button id="addToCart">Add to cart</button>
-                        </footer>
-                    </article>
-                </section> -->
-        </div>
+    <div class="container">
+        <div class="slide">1</div>
+        <div class="slide">2</div>
+        <div class="slide">3</div>
+        <button class="left"> <</button>
+        <button class="right"> ></button>
     </div>
-    <footer class="footer">
-        <div class="container-fluid">
-            <div class="row wrapper">
-                <div class="col col-4 social-networks">
-                    <h3>Social Networks</h3>
-                    <ul>
-                        <li><a href="https://www.instagram.com/"><i class="fab fa-instagram"></i></a></li>
-                        <li><a href="https://github.com/"><i class="zmdi zmdi-github-alt"></i></a></li>
-                        <li><a href="https://twitter.com"><i class="zmdi zmdi-twitter"></i></a></li>
-                        <li><a href="https://facebook.com"><i class="zmdi zmdi-facebook"></i></a></li>
-                        <li><a href="https://youtube.com"><i class="zmdi zmdi-youtube-play"></i></a></li>
-                        <li><a href="https://linkedin.com"><i class="zmdi zmdi-linkedin"></i></a></li>
-                    </ul>
-                </div>
-                <div class="col col-4">
-                    <h3>Pages</h3>
-                    <nav>
-                        <ul>
-                            <li>
-                                <a href="index.html" class="active">Home</a>
-                            </li>
-                            <li>
-                                <a href="index.html">Services</a>
-                            </li>
-                            <li>
-                                <a href="index.html">Contact</a>
-                            </li>
-                            <li>
-                                <a href="index.html">About us</a>
-                            </li>
-                            <li>
-                                <a href="index.html">Author</a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="col col-4 contact">
-                    <h3>Contact</h3>
-                    <p class="info-name">Email: </p>
-                    <p>aleksandar.kovacevic.27.21@ict.edu.rs</p>
-                    <p class="info-name">Phone number:</p>
-                    <p>+381-64-2131-654</p>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col col-12">
-                    <hr/>
-                </div>
-            </div>
-            <div class="row wrapper">
-                <div class="col col-6 d-flex justify-content-center align-items-center">
-                    <p>Copyright @ Game Force 2022</p>
-                </div>
-                <div class="col col-6">
-                    <a href="#doc" id="documentation">Documentation</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <div class="cart">
-        
-    </div>
-    <script src="main.js" type="text/javascript"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
-
+    <script>
+        let slides = document.querySelectorAll('.slide');
+        let leftArr= document.querySelector('.left')
+        let rigthArr= document.querySelector('.right')
+        slides.forEach((slide, indx)=>{
+            slide.style.transform = `translateX(${indx * 100}%)`;
+        })
+        var currSlide = 0;
+        let maxSlide = minSlide = 0;
+        maxSlide = slides.length - 1;
+        rigthArr.addEventListener('click' , ()=>{
+            if(currSlide === maxSlide){
+                currSlide = 0;
+            }else{
+                currSlide++;
+            }
+            slides.forEach((slide , index) =>{
+                slide.style.transform = `translateX(${100 * (index - currSlide)}%)`
+            })
+        })
+        leftArr.addEventListener('click' , ()=>{
+            if(currSlide === minSlide){
+                currSlide = maxSlide;
+            }else{
+                currSlide--;
+            }
+            slides.forEach((slide , index) =>{
+                slide.style.transform = `translateX(${100 * (index - currSlide)}%)`
+            })
+        })
+    </script>
 </body>
 </html>
