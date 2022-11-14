@@ -89,6 +89,10 @@ html{
                             }
                         }
                     }
+                    &.hamburger{
+                        @include flexbox();
+                        display: none;
+                    }
                     &.navbar{
                         @include flexbox();
                     }
@@ -105,6 +109,7 @@ html{
                                 display: inline-block;
                                 margin: 0 12px;
                                 a{
+                                    white-space: nowrap;
                                     color: $orange;
                                     font-weight: 400;
                                     font-size: 1rem;
@@ -116,7 +121,7 @@ html{
                                 }
                                 @include transition();
                                 &:hover{
-                                    transform: scale(1.5);
+                                    transform: scale(1.4);
                                 }
                             }
                         }
@@ -144,6 +149,7 @@ html{
                             @include flexbox();
                             height: 100%;
                             border: 1px solid $blue;
+                            border-left: none;
                             padding: 5px 10px;
                             font-size: 1.6rem;
                             border-radius: 0 5px 5px 0;
@@ -170,7 +176,6 @@ html{
                         &:hover{
                             background-color: $orange;
                             color: $darkBlue;
-                            transform: scale(1.1);
                         }
                         .somethingIsInCart{
                             width: 6px;
@@ -189,6 +194,9 @@ html{
                             }
                         }
                     }
+                }
+                .smallNavbar{
+                    display: none;
                 }
             }
         }
@@ -212,6 +220,13 @@ html{
                         background-position: center;
                         background-size: cover;
                         position: absolute;
+                        z-index: 1;
+                        &.animate{
+                            transition: .64s ease-in-out;
+                        }
+                        &.first-visible{
+                            z-index: 2;
+                        }
                         .slide-text{
                             position: absolute;
                             bottom: 15%;
@@ -276,6 +291,24 @@ html{
                         text-align: center;
                         margin-bottom: 20px;
                     }
+                    .showFilterDiv{
+                        outline: none;
+                        border: none;
+                        background-color: $black;
+                        color: $blue;
+                        box-shadow:  0 0 2px $orange;
+                        position: absolute;
+                        font-size: 1.1rem;
+                        border-radius: 3px;
+                        padding: 5px 10px;
+                        transition: .3s ease-in-out;
+                        display: none;
+                        &:hover{
+                            background-color: $blue;
+                            box-shadow:  0 0 2px $blue;
+                            color: $black;
+                        }
+                    }
                     .sort{
                         width: 100%;
                         @include flexbox();
@@ -294,7 +327,7 @@ html{
                         position: absolute;
                         left: 15px;
                         background-color: $darkBlue;
-                        box-shadow: 0 0 6px $darkBlue;
+                        box-shadow: 0 0 6px $black;
                         padding: 25px 20px 24px 20px;
                         border-radius: 4px;
                         h3{
@@ -417,6 +450,7 @@ html{
                                 }
                                 h3{
                                     margin-top: 10px;
+                                    text-align: center;
                                     @include header3();
                                     
                                 }

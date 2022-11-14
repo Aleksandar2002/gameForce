@@ -8,7 +8,7 @@ slideImages.forEach((slide , index) =>{
     slide.style.transform = `translateX(${index * 100}%)`;
     slide.style.backgroundImage = `url("assets/img/slider/slideImg${index+1}.jpg")`;
 })
-let currentImage = minSlide = maxSlide = 0;
+let currentImage = minSlide = maxSlide = previousImage = 0;
 maxSlide = slideImages.length-1;
 
 if(previousBtn){
@@ -20,20 +20,39 @@ if(previousBtn){
         }
         slideImages.forEach((slide, index) =>{
             slide.style.transform = `translateX(${100 * (index - currentImage)}%)`;
-            slide.style.transition = '.5s ease-in-out';
+            slide.classList.add('animate');
         })
     })
     nextBtn.addEventListener('click', ()=>{
+        previousImage = currentImage;
         if(currentImage === maxSlide){
             currentImage = 0;
         }else{
             currentImage++;
         }
         slideImages.forEach((slide, index) =>{
+            if(index === 1){
+                slide.classList.add('first-visible')
+            }
             slide.style.transform = `translateX(${100 * (index - currentImage)}%)`;
-            slide.style.transition = '.5s ease-in-out';
+            slide.classList.add('animate');
         })
     })
+    let slideInterval  = setInterval(()=>{
+        previousImage = currentImage;
+        if(currentImage === maxSlide){
+            currentImage = 0;
+        }else{
+            currentImage++;
+        }
+        slideImages.forEach((slide, index) =>{
+            if(index === 1){
+                slide.classList.add('first-visible')
+            }
+            slide.style.transform = `translateX(${100 * (index - currentImage)}%)`;
+            slide.classList.add('animate');
+        })
+    },20000)
 }
 
 // CREATE DYNAMIC ELEMENTS
@@ -73,12 +92,13 @@ createFilterCheckBoxes( checkboxForm , labelsTextContent );
 // CREATE SORT SELECT OPTIONS
 const selectTag = document.querySelector('.sortSelect');
 let optValues = new Array('null' , 'ascPrice', 'descPrice' , 'ascName', 'descName');
-let optText = new Array('Default sort order' , 'Ascending price', 'Descending price' , 'Ascending name', 'Descending name');
+let optText = new Array('Sort order' , 'Ascending price', 'Descending price' , 'Ascending name', 'Descending name');
 createSortOptions( selectTag , optValues ,optText );
 
 // SEARCH INPUT
 const searchInput = document.querySelector('.search-input');
 const searchBtn = document.querySelector('.search-btn');
+let searchProductsArr = new Array();
 let isSearching = false;
 
 searchBtn.addEventListener('click', (e)=>{
@@ -95,20 +115,19 @@ searchBtn.addEventListener('click', (e)=>{
     document.querySelector('section.products').classList.remove('flexbox');
 
     // DA LI SE U OBJEKTU PRODUCT ,IZ NIZA PRODUCTS ARR, NALAZI VREDNOST SEARCH INPUTA
-    let filterProductsArr = cloneProdArr.filter(product =>{
+    searchProductsArr = cloneProdArr.filter(product =>{
         if(product.name.toLowerCase().search(searchValue.toLowerCase()) !== -1  ){
             return product;
         }
     })
     // AKO NEMA NI JEDNOG PRODUCTA KOJI ODGOVARA SEARCHU TADA SE POJAVLJUJE PARAGRAF SA PORUKOM
-    if(!filterProductsArr.length){
+    if(!searchProductsArr.length){
         document.querySelector('section.products').classList.add('flexbox');
         document.querySelector('.products p').classList.add('visible');
     }
     // DODAVANJE SVIH PROIZVODE U SECTION
-    productsArr = [...filterProductsArr];
-    createProductsArticle(filterProductsArr);
-    // console.log(filterProductsArr);
+    productsArr = [...searchProductsArr];
+    createProductsArticle(searchProductsArr);
 })
 
 // MAKING POPUP CART VISIBLE
@@ -150,7 +169,7 @@ selectTag.addEventListener('change', (e)=>{
         case 'descPrice': sortProductsByPrice('desc');break;
         case 'ascName': sortProductsByNames('asc');break;
         case 'descName': sortProductsByNames('desc');break;
-        default: productsArr = [...cloneProdArr];
+        // default: productsArr = [...cloneProdArr];
     }
     createProductsArticle(productsArr);
 })
@@ -158,39 +177,83 @@ selectTag.addEventListener('change', (e)=>{
 // FILTER PRODUCTS
 const filterDiv = document.querySelector('#filter');
 const filterBtn = document.querySelector('#filterBtn');
+let isFilterVisible = false; // used in SHOW FILTER
 filterBtn.addEventListener('click' , (e)=>{
     e.preventDefault();
 
     // FILTER BY PRODUCT TYPES AND PRICE
     const typeCheckboxes = Array.from(filterDiv.querySelectorAll('.checkboxes input:checked'));
-    const maxPriceInputValue = filterDiv.querySelector('[name="maxPrice"]').value;
-    const minPriceInputValue = filterDiv.querySelector('[name="minPrice"]').value;
     var newProductArray = new Array;
     if(typeCheckboxes.length){
         for(let checkbox of typeCheckboxes){
             let checkboxValue = checkbox.getAttribute('value');
             if(isSearching){
-                productsArr.forEach(product =>{
-                    if(product.type === checkboxValue && (product.price >= minPriceInputValue && product.price <= maxPriceInputValue)){
-                        newProductArray.push(product);
-                    }
-                })
+                filterProducts(searchProductsArr , newProductArray , checkboxValue);
             }   else{
-                cloneProdArr.forEach(product =>{
-                    if(product.type === checkboxValue && (product.price >= minPriceInputValue && product.price <= maxPriceInputValue)){
-                        newProductArray.push(product);
-                    }
-                })
+                filterProducts(cloneProdArr , newProductArray , checkboxValue);
             }
         }
+        productsArr = [...newProductArray];
+        createProductsArticle(newProductArray);
+    }else{
+        if(isSearching){
+            productsArr= searchProductsArr.filter(product=>{
+                if(checkProductPrice(product))return product;
+            })
+            createProductsArticle(productsArr);
+        } else{
+            let newArray = cloneProdArr.filter(product=>{
+                if(checkProductPrice(product))return product;
+            })
+            productsArr = [...newArray];
+            createProductsArticle(newArray);
+        }
     }
-    productsArr = [...newProductArray];
 
-    createProductsArticle(newProductArray);
+    if(isFilterVisible){
+        filterDiv.classList.remove('visible');
+        isFilterVisible = false;
+    }
 })
 
+// SHOW NAVBAR WHEN HAMBURGER BTN IS CLICKED
+const hamburgerBtn = document.querySelector('#hamburgerBtn');
+let hamburgerIndex = false;
+let smallNavbarNavTag = document.querySelector('.smallNavbar nav');
+createNavList(smallNavbarNavTag);
 
+hamburgerBtn.addEventListener('click' , ()=>{
+    if(hamburgerIndex){
+        smallNavbarNavTag.parentElement.style.width = '0' ;
+        hamburgerIndex = false;
+    } else{
+        hamburgerIndex = true;
+        smallNavbarNavTag.parentElement.style.width = '200px' ;
+    }
+})
 
+// SHOW FILTER DIV ON SMALER RESOULUTION
+const showFilterBtn = document.querySelector('.showFilterDiv');
+
+showFilterBtn.addEventListener('click', ()=>{
+    if(isFilterVisible){
+        filterDiv.classList.remove('visible');
+        isFilterVisible = false;
+    } else{
+        filterDiv.classList.add('visible');
+        isFilterVisible = true;
+    }
+})
+
+window.addEventListener('resize' , ()=>{
+    // FILTER
+    filterDiv.classList.remove('visible');
+    isFilterVisible = false;
+    if(!window.matchMedia("(max-width: 1380px)").matches){
+        filterDiv.classList.add('visible');
+    }
+
+})
 // FUNCTIONS
 function Product(name , src , price ,type){
     this.name = name;
@@ -472,4 +535,17 @@ function enableAddToCartBtn(button){
     button.classList.remove('added');
     button.disabled = false;
     button.textContent = 'Add to cart';
+}
+function checkProductPrice(product) {
+    let minPriceInputValue =  filterDiv.querySelector('[name="minPrice"]').value;
+    let maxPriceInputValue =  filterDiv.querySelector('[name="maxPrice"]').value;
+
+    return(product.price >= minPriceInputValue && product.price <= maxPriceInputValue)?true:false;
+} 
+function filterProducts(baseArr , newArray , checkboxValue){
+    baseArr.forEach(product =>{
+        if(product.type === checkboxValue && checkProductPrice(product)){
+            newArray.push(product);
+        }
+    })
 }

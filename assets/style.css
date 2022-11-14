@@ -82,6 +82,19 @@ html body header .row .col.logo a img {
   width: 40px;
 }
 
+html body header .row .col.hamburger {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  display: none;
+}
+
 html body header .row .col.navbar {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -130,6 +143,7 @@ html body header .row .col nav ul li {
 }
 
 html body header .row .col nav ul li a {
+  white-space: nowrap;
   color: #FC7753;
   font-weight: 400;
   font-size: 1rem;
@@ -144,8 +158,8 @@ html body header .row .col nav ul li a:hover {
 }
 
 html body header .row .col nav ul li:hover {
-  -webkit-transform: scale(1.5);
-          transform: scale(1.5);
+  -webkit-transform: scale(1.4);
+          transform: scale(1.4);
 }
 
 html body header .row .col .search-form {
@@ -193,6 +207,7 @@ html body header .row .col .search-form button {
           align-items: center;
   height: 100%;
   border: 1px solid #66D7D1;
+  border-left: none;
   padding: 5px 10px;
   font-size: 1.6rem;
   border-radius: 0 5px 5px 0;
@@ -235,8 +250,6 @@ html body header .row .col .shopping-cart {
 html body header .row .col .shopping-cart:hover {
   background-color: #FC7753;
   color: #403D58;
-  -webkit-transform: scale(1.1);
-          transform: scale(1.1);
 }
 
 html body header .row .col .shopping-cart .somethingIsInCart {
@@ -265,6 +278,10 @@ html body header .row .col .shopping-cart .somethingIsInCart.visible {
           align-items: center;
 }
 
+html body header .row .smallNavbar {
+  display: none;
+}
+
 html body .main {
   min-height: 100%;
 }
@@ -291,6 +308,16 @@ html body .main .container-fluid .slider .col {
   background-position: center;
   background-size: cover;
   position: absolute;
+  z-index: 1;
+}
+
+html body .main .container-fluid .slider .col.animate {
+  -webkit-transition: .64s ease-in-out;
+  transition: .64s ease-in-out;
+}
+
+html body .main .container-fluid .slider .col.first-visible {
+  z-index: 2;
 }
 
 html body .main .container-fluid .slider .col .slide-text {
@@ -370,6 +397,29 @@ html body .main .container-fluid .wrapper h2 {
   margin-bottom: 20px;
 }
 
+html body .main .container-fluid .wrapper .showFilterDiv {
+  outline: none;
+  border: none;
+  background-color: #2D3047;
+  color: #66D7D1;
+  -webkit-box-shadow: 0 0 2px #FC7753;
+          box-shadow: 0 0 2px #FC7753;
+  position: absolute;
+  font-size: 1.1rem;
+  border-radius: 3px;
+  padding: 5px 10px;
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+  display: none;
+}
+
+html body .main .container-fluid .wrapper .showFilterDiv:hover {
+  background-color: #66D7D1;
+  -webkit-box-shadow: 0 0 2px #66D7D1;
+          box-shadow: 0 0 2px #66D7D1;
+  color: #2D3047;
+}
+
 html body .main .container-fluid .wrapper .sort {
   width: 100%;
   display: -webkit-box;
@@ -401,8 +451,8 @@ html body .main .container-fluid .wrapper .filter {
   position: absolute;
   left: 15px;
   background-color: #403D58;
-  -webkit-box-shadow: 0 0 6px #403D58;
-          box-shadow: 0 0 6px #403D58;
+  -webkit-box-shadow: 0 0 6px #2D3047;
+          box-shadow: 0 0 6px #2D3047;
   padding: 25px 20px 24px 20px;
   border-radius: 4px;
 }
@@ -608,6 +658,7 @@ html body .main .container-fluid .wrapper section.products article.product figur
 
 html body .main .container-fluid .wrapper section.products article.product figure h3 {
   margin-top: 10px;
+  text-align: center;
   font-size: 1.15rem;
 }
 

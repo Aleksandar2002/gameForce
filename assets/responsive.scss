@@ -1,0 +1,450 @@
+@import "style.scss";
+@media screen and (max-width: 1380px) {
+    html{
+        body{
+            .wrapper{
+                width: 85%;
+            }
+            .main{
+                .container-fluid{
+                    .slider{
+                        .col{
+                            .slide-text{
+                                h1{
+                                    font-size: 2.5rem;
+                                }
+                                h2{
+                                    font-size: 1.35rem;
+                                }
+                            }
+                        }
+                    }
+                    position: relative;
+                    .wrapper{
+                        width: 90%;
+                        .showFilterDiv{
+                            display: block;
+                        }
+                        .sort{
+                            .sortSelect{
+                                option{
+                                    font-size: .9rem;
+                                }
+                            }
+                        }
+                        .filter{
+                            width: 300px;
+                            // padding: 0;
+                            overflow: hidden;
+                            left: 0;
+                            top: 19vh;
+                            z-index: 100;
+                            transition: .3s ease-in-out;
+                            transform: translateX(-300px);
+                            form{
+                                width: 100%;
+                            }
+                            &.visible{
+                                transform: translateX(0);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 1120px) {
+    html{
+        font-size: .90rem;
+        body{
+            .wrapper{
+                width: 95%;
+            }
+            header{
+                .row{
+                    .col{
+                        nav{
+                            ul{
+                                li{
+                                    a{
+                                        font-size: .9;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .main{
+                .container-fluid{
+                    .slider{
+                        .col{
+                            .slide-text{
+                                h1{
+                                    font-size: 2.3rem;
+                                }
+                                h2{
+                                    font-size: 1.2rem;
+                                }
+                            }
+                        }
+                    }
+                    .wrapper{
+                        section.products{
+                            p.NoProductsMessage{
+                                font-size: 1.2rem;
+                            }
+                            article.product{
+                                figure{
+                                    img{
+                                        width: 150px;
+                                        height: 150px;
+                                    }
+                                    h3{
+                                        font-size: 1.1rem;
+                                    }
+                                }
+                                footer{
+                                    p{
+                                        font-size: 1rem;
+                                    }
+                                    button{
+                                        font-size: .97rem;
+                                        padding: 3.6px 10px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 991px) {
+    html{
+        font-size: .93.4rem;
+        body{
+            .wrapper{
+                width: 95%;
+            }
+            header{
+                .row{
+                    padding: 30px 0;
+                    .col{
+                        &.logo{
+                            justify-content: center;
+                        }
+                        &.navbar{
+                            justify-content: flex-end;
+                        }
+                        &.search-cart{
+                            margin-left: 24px;
+                            margin-top: 20px;
+                        }
+                        nav{
+                            ul{
+                                li{
+                                    a{
+                                        font-size: .9;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .main{
+                .container-fluid{
+                    .slider{
+                        .col{
+                            .slide-text{
+                                h1{
+                                    font-size: 2.3rem;
+                                }
+                                h2{
+                                    font-size: 1.2rem;
+                                }
+                            }
+                        }
+                    }
+                    .wrapper{
+                        width: 100%;
+                        section.products{
+                            grid-template-columns: minmax(200px , 320px)  minmax(200px , 320px);
+                            justify-content: center;
+                        }
+                    }
+                }
+            }
+            .footer{
+                .container-fluid{
+                    .wrapper{
+                        width: 100%;
+                        .col{
+                            h3{
+                                font-size: 1.5rem;
+                            }
+                            &.contact{
+                                margin: 30px 0 12px 0 ;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 850px) {
+    html{
+        font-size: .92.4rem;
+        body{
+            header{
+                .row{
+                    .col{
+                        &.hamburger{
+                            display: flex;
+                            button{
+                                border: none;
+                                outline: none;
+                                background-color: $blue;
+                                color: $black;
+                                font-size: 1rem;
+                                box-shadow: 0 0 10px $black;
+                                border-radius: 3px;
+                                padding: 5px 10px;
+                                transition: .3s ease-in-out;
+                                &:hover{
+                                    color: $blue;
+                                    background-color: $black;
+                                }
+                            }
+                        }
+                        &.navbar{
+                            display: none;
+                        }
+                        &.search-cart{
+                            margin-top: 0;
+                            margin-left: 0;
+                            justify-content: center;
+                        }
+                        nav{
+                            ul{
+                                li{
+                                    a{
+                                        font-size: .9;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    .smallNavbar{
+                        background-color:$darkBlue;
+                        z-index: 100;
+                        position: absolute;
+                        width: 0px;
+                        height: 170px;
+                        right: 0px;
+                        bottom: -170px;
+                        padding: 20px 0;
+                        border-radius: 4px;
+                        box-shadow: 0 0 5px $black;
+                        transition: .3s ease-in-out;
+                        transform:  translate(0);
+                        overflow: hidden;
+                        @include flexcol();
+                        ul{
+                            padding: 0;
+                            @include flexcol();
+                            align-items: flex-start;
+                            li{
+                                display: block;
+                                margin: 2px 0;
+                                a{
+                                    white-space: nowrap;
+                                    color: $orange;
+                                    font-weight: 400;
+                                    font-size: 1rem;
+                                    @include transition();
+                                    &:hover{
+                                        color: $blue;
+                                        transform: scale(2);
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 768px) {
+    html{
+        body{
+            .main{
+                .container-fluid{
+                    .slider{
+                        .col{
+                            .slide-text{
+                                max-width: 400px;
+                                h1{
+                                    font-size: 2.1rem;
+                                }
+                                h2{
+                                    font-size: 1.16rem;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 660px) {
+    html{
+        body{
+            .main{
+                .container-fluid{
+                    .slider{
+                        .col{
+                            .slide-text{
+                                // max-width: 100%;
+                                // width: 100%;
+                                h1{
+                                    font-size: 2.1rem;
+                                }
+                                h2{
+                                    font-size: 1.16rem;
+                                }
+                            }
+                        }
+                    }
+                    .wrapper{
+                        h2{
+                            margin-bottom: 30px;
+                            font-size: 2rem;
+                        }
+                        width: 100%;
+                        section.products{
+                            padding: 50px 0 40px 0;
+                            grid-row-gap: 40px;
+                            grid-template-columns: minmax(200px , 320px);
+                            justify-content: center;
+                            article.product{
+                                figure{
+                                    img{
+                                        width: 170px;
+                                        height: 170px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 576px) {
+    html{
+        body{
+            .footer{
+                padding: 15px 0 30px 0;
+                .container-fluid{
+                    .wrapper{
+                        width: 100%;
+                        .col{
+                            h3{
+                                font-size: 1.42rem;
+                            }
+                            &.social-networks , &.navbar , &.contact{ 
+                                margin: 15px 0;
+                            }
+                            
+                        }
+                        #documentation{
+                            margin-top: 30px;
+                        }
+                    }
+                    hr{
+                        width: 76%;
+                    }
+                }
+            }
+        }
+    }
+}
+@media screen and (max-width: 500px) {
+    html{
+        body{
+            header{
+                .row{
+                    .col{
+                        .search-form{
+                            input{
+                                width: 100px;
+                            }
+                        }
+                    }
+                }
+            }
+            .main{
+                .container-fluid{
+                    .slider{
+                        .col{
+                            .slide-text{
+                                max-width: 350px;
+                                h1{
+                                    font-size: 2.1rem;
+                                }
+                                h2{
+                                    font-size: 1.16rem;
+                                }
+                            }
+                        }
+                        .arrow button{
+                            font-size: 4.6rem;
+                        }
+                    }
+                }
+            }
+            .popup-cart{
+                .cart{
+                    padding: 30px 20px;
+                    h3{
+                        font-size: 1.54rem;
+                    }
+                    h3 ~ p{
+                        font-size: 1.06rem;
+                    }
+                    ul{
+                        padding: 0;
+                        li{
+                            p{
+                                font-size: .9rem;
+                            }
+                            input{
+                                width: 35px;
+                                font-size: .9rem;
+                            }
+                            .deleteBtn{
+                                font-size: .9rem;
+                                padding: 3px 8px;
+                            }
+                        }
+                    }
+                    #buyBtn{
+                        padding: 4px 8px;
+                        font-size: .9rem;
+                    }
+                    .totalPrice{
+                        font-size: 1rem;
+                    }
+                }
+            }
+        }
+    }
+}

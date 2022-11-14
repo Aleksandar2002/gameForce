@@ -67,8 +67,14 @@
         <button class="left"> <</button>
         <button class="right"> ></button>
     </div>
-    <script>
-        let slides = document.querySelectorAll('.slide');
+    <ul id="lista">
+        <li>A</li>
+        <li>B</li>
+        <li>C</li>
+        <li>D</li>
+    </ul>
+    <script type="text/javascript">
+        /* let slides = document.querySelectorAll('.slide');
         let leftArr= document.querySelector('.left')
         let rigthArr= document.querySelector('.right')
         slides.forEach((slide, indx)=>{
@@ -96,7 +102,104 @@
             slides.forEach((slide , index) =>{
                 slide.style.transform = `translateX(${100 * (index - currSlide)}%)`
             })
+        }) */
+
+        // var p;
+        // function pera(){
+        //     var p = 2;
+        //     // console.log(p);
+        // }
+        // pera()
+        // p = 2;
+
+        // console.log(isNaN(p +'2s2'));
+        // console.log('Rekavsi \'\\danas je lep dan\'');
+        // console.log(typeof (p + '2'));
+        // console.log(parseInt(p+'s2s'));
+        // let r = null + 23;
+        // console.log(r.toString());
+        // let r2 = 23 * parseInt(32.2);
+        // let rt = null - true * '2'; 
+        // console.log(rt);
+
+        // sistemski metodi
+        // alert('pera')
+        // let p2 = confirm('Danas je petak')
+        // console.log(p2);
+        // let p3 = prompt('Koji je danas dan' ,'Unesi dan');
+        // console.log(p3);
+        
+        function fja1(){
+            return;
+            console.log(arguments);
+        }
+        fja1(2, 4 ,5)
+
+        // Petlje
+        let niz = new Array('pera' , 'peric', '43');
+        let niz2 = new Array(2 ,4,4,5,52,1,2,55,3,2)
+        niz[6] = 'petak';
+        // for(let a= 0 ; a<niz.length ; a++){
+        //     console.log(niz[a]);
+        // }
+
+        // for(let el in niz){
+        //     console.log(niz[el]);
+        // }
+        // niz.forEach(el=>{
+        //     console.log(el);
+        // })
+        niz.push('Miloica')
+        niz.unshift('Milisav')
+        // niz.shift();
+        // niz.pop();
+        let index = niz.findIndex(el=>{
+            if(el == 'pera'){
+                return true
+            }
         })
+        niz2.sort((a, b)=> b-a)
+        console.log(niz2);
+        let sortiranNiz = niz.sort();
+        console.log(niz);
+
+        // stringovi
+        let str1 = 'Today is a beautiful day';
+        console.log(str1.charAt(2));
+        console.log(str1.indexOf('i' , 10));
+        console.log(str1.substr(4, 4));
+        console.log(str1.substring(4, 10));
+        console.log(str1.replace('Today is' , 'Yesterday was'));
+        str1= str1.split(' ');
+        str1 = str1.join(', ')
+        console.log(str1);
+
+        // brojevi
+        let randomNum = Math.floor(Math.random() * 129 + 128);
+        console.log(randomNum);
+
+        // date 
+        let currentDate = new Date();
+        console.log(currentDate.getMinutes());
+        console.log(currentDate.getMonth());
+        console.log(currentDate.getYear());
+        console.log(currentDate.getDay());
+        console.log(Date.now());
+        console.log(currentDate.getTime());
+        currentDate.setDate(6);
+        console.log(currentDate.getDay());
+
+        let list = document.querySelector('#lista');
+        console.log(list.attributes);
+        console.log(list.hasAttribute('id'));
+        console.log(list.childNodes);
+
+        let p = '2' * 3.2
+        console.log(p);
+        
+        let nizb =  new Array('pera' , 'mika' , 'zika')
+        let niza = nizb.sort(); // menja niz
+        console.log(niza);
     </script>
 </body>
 </html>
