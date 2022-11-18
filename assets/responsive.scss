@@ -1,4 +1,9 @@
 @import "style.scss";
+@media screen and (min-width:1800px) {
+    html{
+        font-size: 1.2rem;
+    }
+}
 @media screen and (max-width: 1380px) {
     html{
         body{
@@ -364,6 +369,9 @@
                                 margin: 15px 0;
                             }
                             
+                        }
+                        .footer-logo{
+                            margin-top: 30px;
                         }
                         #documentation{
                             margin-top: 30px;

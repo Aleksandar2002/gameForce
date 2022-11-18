@@ -57,6 +57,39 @@
         .left{
             left: 10px;
         }
+        .animationDiv{
+            width: 300px ;
+            height: 300px ;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #ededed;
+            background-color: #2e2e2e;
+            opacity: 0;
+            animation-name: fadeIn;
+            animation-duration:1s ;
+            animation-delay: .2s;
+            position: absolute;
+            top: 0;
+        }
+        @keyframes fadeIn {
+            form{opacity: 0;}
+            to{opacity: 1;}
+        }
+        .paralax{
+            min-height: 500px;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+            background-image: url("assets/img/slider/slideImg1.jpg");
+            width: 100%;
+            min-height: 500px;
+            height: calc(100vh - 2 * 40px - 41px);
+            position: absolute;
+            z-index: 1;
+        }
     </style>
 </head>
 <body>
@@ -73,6 +106,14 @@
         <li>C</li>
         <li>D</li>
     </ul>
+
+    <div class="animationDiv">
+        <p>1</p>
+    </div>
+
+    <div class="paralax">
+
+    </div>
     <script type="text/javascript">
         /* let slides = document.querySelectorAll('.slide');
         let leftArr= document.querySelector('.left')

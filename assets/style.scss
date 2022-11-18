@@ -85,7 +85,7 @@ html{
                         justify-content: flex-start;
                         a{
                             img{
-                                width: 40px;
+                                width: 50px;
                             }
                         }
                     }
@@ -217,6 +217,7 @@ html{
                         min-height: 500px;
                         height: calc(100vh - 2 * 40px - 41px);
                         background-image: url("img/slider/slideImg1.jpg");
+                        background-repeat: no-repeat;
                         background-position: center;
                         background-size: cover;
                         position: absolute;
@@ -228,6 +229,7 @@ html{
                             z-index: 2;
                         }
                         .slide-text{
+                            font-family: 'Barlow', sans-serif;
                             position: absolute;
                             bottom: 15%;
                             max-width: 600px;
@@ -237,6 +239,8 @@ html{
                             border-radius: 5px;
                             padding: 30px;
                             backdrop-filter: blur(10px);
+                            animation-name: fadeIn;
+                            animation-duration: 1.2s;
                             h1{
                                 color: $orange;
                                 @include header1();
@@ -330,6 +334,8 @@ html{
                         box-shadow: 0 0 6px $black;
                         padding: 25px 20px 24px 20px;
                         border-radius: 4px;
+                        animation-name:fadeIn;
+                        animation-duration: 1.5s;
                         h3{
                             font-size: 1.4rem;
                             color: $orange;
@@ -426,6 +432,7 @@ html{
                                 display: block;
                             }
                         }
+                        font-family: 'Barlow', sans-serif;
                         article.product{
                             @include flexcol();
                             background-color: $black;
@@ -433,7 +440,10 @@ html{
                             padding-bottom: 30px;
                             border-radius: 5px;
                             box-shadow: 0 0 6px $orange;
-                            transition: .3s ease;
+                            transition: .1s ease;
+                            animation-name: fadeIn;
+                            animation-duration:1.15s;
+                            // animation-delay: 1s;
                             &:hover{
                                 box-shadow:  0 0 12px $blue;
                             }
@@ -483,6 +493,101 @@ html{
                                         color: $darkBlue;
                                     }
                                 }
+                            }
+                        }
+                    }
+                }
+                .our-services{
+                    width: 100%;
+                    background-color: $darkBlue;
+                    height: 800px;
+                    display:grid;
+                    grid-template-columns: 70% 30%;
+                    .service{
+                        width: 100%;
+                        height: 100%;
+                        background-repeat: no-repeat;
+                        background-size: cover;
+                        background-position: center;
+                        position: relative;
+                        .layer{
+                            position: absolute;
+                            z-index: 10;
+                            top: 0;
+                            left: 0;
+                            width: 100%;
+                            height: 100%;
+                            background-color: rgba(64, 61, 88, 0.2);
+                            transition: .3s ease-in-out;
+                            @include flexbox();
+                            p{
+                                color: $darkBlue;
+                                visibility: hidden;
+                                background-color: $orange;
+                                padding: 3px 12px;
+                                font-size: 1.1rem;
+                                text-align: center;
+                                border-radius: 3px;
+                                opacity: 0;
+                                transition: .3s ease-in-out;
+                            }
+                        }
+                    }
+                    .biggest-block{
+                        // background-attachment: fixed;
+                        background-color: $blue;
+                        position: relative;
+                        grid-row: 1/3;
+                        background-image: url();
+                        animation: fadeIn 2s ;
+                        // filter: grayscale(.2);
+                        .text-content{
+                            font-family: 'Barlow', sans-serif;
+                            width: 40%;
+                            max-width: 500px;
+                            position: absolute;
+                            bottom: 10%;
+                            left: 5%;
+                            background-color: rgba(100,100 ,100 ,0.5);
+                            border-radius: 5px;
+                            padding: 30px;
+                            backdrop-filter: blur(6px);
+                            h2{
+                                font-size: 2.5rem;
+                                color: $orange;
+                            }
+                            p{
+                                font-size: 1.2rem;
+                                margin: 20px 0;
+                                color: $blue;
+                            }
+                            a{
+                                background-color: $orange;
+                                color: $darkBlue;
+                                border-radius: 3px;
+                                padding: 5px 10px;
+                                font-size: 1.1rem;
+                                box-shadow: 0  0 10px $black;
+                                transition: .2s ease-in-out;
+                                margin-top: 6px;
+                                &:hover{
+                                    background-color: rgba(252, 119, 83, 0.8);
+                                }
+                            }
+                        }
+                    }
+                    .smaller-block{
+                        cursor: pointer;
+                        animation: fadeIn 1.7s;
+                        &:hover{
+                            .layer{
+                                p{
+                                    visibility: visible;
+                                    opacity: 1;
+                                }
+                                background-color: rgba(64, 61, 88, 0.9);
+                                background-color: rgba(252, 119, 83, 0.9);
+                                background-color: rgba(82, 195, 189, 0.7);
                             }
                         }
                     }
@@ -572,6 +677,11 @@ html{
                         color: $blue;
                         font-size: .94rem;
                         margin: 0;
+                    }
+                    .footer-logo{
+                        img{
+                            width: 40px;
+                        }
                     }
                     #documentation{
                         border-radius: 3px;
@@ -709,5 +819,82 @@ html{
                 }
             }
         }
+        .preloader{
+            width: 100%;
+            height: 100vh;
+            background-color:$darkBlue;
+            position: absolute;
+            z-index: 100;
+            @include flexbox();
+            top: 0;
+            &.hide{
+                display: none;
+            }
+            .content{
+                width: 50px;
+                height: 50px;
+                // border-top: 4px solid $blue;
+                // border-left: 4px solid $blue;
+                // border-bottom: 4px solid $orange;
+                // border-right: 4px solid $orange;
+                border-radius: 50px;
+                animation: rotate .6s infinite;
+                transition: 1s ease-in-out;
+                @include flexbox();
+                .bigCircle{
+                    @include flexbox();
+                    width: 50px;
+                    height: 50px;
+                    border-radius:50px;
+                    border-top: 4px solid $blue;
+                    border-left: 4px solid $blue;
+                    border-bottom: 4px solid $orange;
+                    border-right: 4px solid $orange;
+                }
+                .smallCircle{
+                    width: 35px;
+                    height: 35px;
+                    border-radius: 35px;
+                    border: 4px solid $blue;
+                    border-top: 4px solid $orange;
+                    border-left: 4px solid $orange;
+                    border-bottom: 4px solid $blue;
+                    border-right: 4px solid $blue;
+                }
+            }
+            @keyframes rotate {
+                from{
+                    transform: rotate(0);
+                }
+                to{
+                    transform: rotate(360deg);
+                }
+            }
+        }
     }
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+::-webkit-scrollbar {
+    width: 11px;
+
+}
+::-webkit-scrollbar-track {
+    box-shadow:inset 0px 0px 1px $black; 
+    background-color: $darkBlue;
+    border-radius: 2px;
+}
+::-webkit-scrollbar-thumb {
+    border-radius: 2px;
+    background: $blue; 
+}
+::-webkit-scrollbar-thumb:hover {
+    background: $orange; 
 }

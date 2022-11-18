@@ -79,7 +79,7 @@ html body header .row .col.logo {
 }
 
 html body header .row .col.logo a img {
-  width: 40px;
+  width: 50px;
 }
 
 html body header .row .col.hamburger {
@@ -305,6 +305,7 @@ html body .main .container-fluid .slider .col {
   min-height: 500px;
   height: calc(100vh - 2 * 40px - 41px);
   background-image: url("img/slider/slideImg1.jpg");
+  background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   position: absolute;
@@ -321,6 +322,7 @@ html body .main .container-fluid .slider .col.first-visible {
 }
 
 html body .main .container-fluid .slider .col .slide-text {
+  font-family: 'Barlow', sans-serif;
   position: absolute;
   bottom: 15%;
   max-width: 600px;
@@ -331,6 +333,10 @@ html body .main .container-fluid .slider .col .slide-text {
   padding: 30px;
   -webkit-backdrop-filter: blur(10px);
           backdrop-filter: blur(10px);
+  -webkit-animation-name: fadeIn;
+          animation-name: fadeIn;
+  -webkit-animation-duration: 1.2s;
+          animation-duration: 1.2s;
 }
 
 html body .main .container-fluid .slider .col .slide-text h1 {
@@ -455,6 +461,10 @@ html body .main .container-fluid .wrapper .filter {
           box-shadow: 0 0 6px #2D3047;
   padding: 25px 20px 24px 20px;
   border-radius: 4px;
+  -webkit-animation-name: fadeIn;
+          animation-name: fadeIn;
+  -webkit-animation-duration: 1.5s;
+          animation-duration: 1.5s;
 }
 
 html body .main .container-fluid .wrapper .filter h3 {
@@ -574,6 +584,7 @@ html body .main .container-fluid .wrapper section.products {
   grid-row-gap: 60px;
   padding: 50px 0 70px 0;
   position: relative;
+  font-family: 'Barlow', sans-serif;
 }
 
 html body .main .container-fluid .wrapper section.products.flexbox {
@@ -618,8 +629,12 @@ html body .main .container-fluid .wrapper section.products article.product {
   border-radius: 5px;
   -webkit-box-shadow: 0 0 6px #FC7753;
           box-shadow: 0 0 6px #FC7753;
-  -webkit-transition: .3s ease;
-  transition: .3s ease;
+  -webkit-transition: .1s ease;
+  transition: .1s ease;
+  -webkit-animation-name: fadeIn;
+          animation-name: fadeIn;
+  -webkit-animation-duration: 1.15s;
+          animation-duration: 1.15s;
 }
 
 html body .main .container-fluid .wrapper section.products article.product:hover {
@@ -705,6 +720,129 @@ html body .main .container-fluid .wrapper section.products article.product foote
 html body .main .container-fluid .wrapper section.products article.product footer button.added {
   background-color: #FC7753;
   color: #403D58;
+}
+
+html body .main .container-fluid .our-services {
+  width: 100%;
+  background-color: #403D58;
+  height: 800px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 70% 30%;
+      grid-template-columns: 70% 30%;
+}
+
+html body .main .container-fluid .our-services .service {
+  width: 100%;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+html body .main .container-fluid .our-services .service .layer {
+  position: absolute;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(64, 61, 88, 0.2);
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+html body .main .container-fluid .our-services .service .layer p {
+  color: #403D58;
+  visibility: hidden;
+  background-color: #FC7753;
+  padding: 3px 12px;
+  font-size: 1.1rem;
+  text-align: center;
+  border-radius: 3px;
+  opacity: 0;
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+}
+
+html body .main .container-fluid .our-services .biggest-block {
+  background-color: #66D7D1;
+  position: relative;
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 2;
+  grid-row: 1/3;
+  background-image: url();
+  -webkit-animation: fadeIn 2s;
+          animation: fadeIn 2s;
+}
+
+html body .main .container-fluid .our-services .biggest-block .text-content {
+  font-family: 'Barlow', sans-serif;
+  width: 40%;
+  max-width: 500px;
+  position: absolute;
+  bottom: 10%;
+  left: 5%;
+  background-color: rgba(100, 100, 100, 0.5);
+  border-radius: 5px;
+  padding: 30px;
+  -webkit-backdrop-filter: blur(6px);
+          backdrop-filter: blur(6px);
+}
+
+html body .main .container-fluid .our-services .biggest-block .text-content h2 {
+  font-size: 2.5rem;
+  color: #FC7753;
+}
+
+html body .main .container-fluid .our-services .biggest-block .text-content p {
+  font-size: 1.2rem;
+  margin: 20px 0;
+  color: #66D7D1;
+}
+
+html body .main .container-fluid .our-services .biggest-block .text-content a {
+  background-color: #FC7753;
+  color: #403D58;
+  border-radius: 3px;
+  padding: 5px 10px;
+  font-size: 1.1rem;
+  -webkit-box-shadow: 0 0 10px #2D3047;
+          box-shadow: 0 0 10px #2D3047;
+  -webkit-transition: .2s ease-in-out;
+  transition: .2s ease-in-out;
+  margin-top: 6px;
+}
+
+html body .main .container-fluid .our-services .biggest-block .text-content a:hover {
+  background-color: rgba(252, 119, 83, 0.8);
+}
+
+html body .main .container-fluid .our-services .smaller-block {
+  cursor: pointer;
+  -webkit-animation: fadeIn 1.7s;
+          animation: fadeIn 1.7s;
+}
+
+html body .main .container-fluid .our-services .smaller-block:hover .layer {
+  background-color: rgba(64, 61, 88, 0.9);
+  background-color: rgba(252, 119, 83, 0.9);
+  background-color: rgba(82, 195, 189, 0.7);
+}
+
+html body .main .container-fluid .our-services .smaller-block:hover .layer p {
+  visibility: visible;
+  opacity: 1;
 }
 
 html body .footer {
@@ -827,6 +965,10 @@ html body .footer .container-fluid .wrapper p {
   color: #66D7D1;
   font-size: .94rem;
   margin: 0;
+}
+
+html body .footer .container-fluid .wrapper .footer-logo img {
+  width: 40px;
 }
 
 html body .footer .container-fluid .wrapper #documentation {
@@ -1015,5 +1157,136 @@ html body .popup-cart .cart p:nth-of-type(2) {
 html body .popup-cart .cart .totalPrice {
   color: #FC7753;
   font-size: 1.1rem;
+}
+
+html body .preloader {
+  width: 100%;
+  height: 100vh;
+  background-color: #403D58;
+  position: absolute;
+  z-index: 100;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  top: 0;
+}
+
+html body .preloader.hide {
+  display: none;
+}
+
+html body .preloader .content {
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  -webkit-animation: rotate .6s infinite;
+          animation: rotate .6s infinite;
+  -webkit-transition: 1s ease-in-out;
+  transition: 1s ease-in-out;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+html body .preloader .content .bigCircle {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50px;
+  border-top: 4px solid #66D7D1;
+  border-left: 4px solid #66D7D1;
+  border-bottom: 4px solid #FC7753;
+  border-right: 4px solid #FC7753;
+}
+
+html body .preloader .content .smallCircle {
+  width: 35px;
+  height: 35px;
+  border-radius: 35px;
+  border: 4px solid #66D7D1;
+  border-top: 4px solid #FC7753;
+  border-left: 4px solid #FC7753;
+  border-bottom: 4px solid #66D7D1;
+  border-right: 4px solid #66D7D1;
+}
+
+@-webkit-keyframes rotate {
+  from {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@keyframes rotate {
+  from {
+    -webkit-transform: rotate(0);
+            transform: rotate(0);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+@-webkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 11px;
+}
+
+::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0px 0px 1px #2D3047;
+          box-shadow: inset 0px 0px 1px #2D3047;
+  background-color: #403D58;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb {
+  border-radius: 2px;
+  background: #66D7D1;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #FC7753;
 }
 /*# sourceMappingURL=style.css.map */
