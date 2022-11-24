@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Game Force</title>
-    <link rel="shortcut icon" href="#" type="../image/x-icon"/>
+    <link rel="shortcut icon" href="../assets/img/favicon.png" type="image/png"/>
     <link rel="stylesheet" type="text/css" href="../assets/style.css"/>
     <link rel="stylesheet" type="text/css" href="../assets/responsive.css"/>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous"/>
@@ -20,22 +20,15 @@
 <body>
     <header class="container-fluid">
         <div class="row wrapper">
-            <div class="col col-xl-1 col-lg-1 col-md-2 col-sm-1 col-xs-1 logo">
+            <div class="col col-xl-1 col-lg-1 col-md-2 col-sm-2 col-xs-2 col-2 logo">
                 <a href="../index.html"><img src="../assets/img/logo.png" alt="Logo"/></a>
             </div>
-            <div class="col col-xl-6 col-md-10 col-lg-6 navbar">
+            <div class="col col-xl-11 col-md-10 col-lg-11 navbar notIndexPage">
                 <nav>
 
                 </nav>
             </div>
-            <div class="col col-xl-5 col-lg-5 col-md-8 col-sm-10 col-xs-10  search-cart">
-                <form action="stranica.php" method="POST" class="search-form">
-                    <input type="search" name="search-input" class="search-input" placeholder="Search..."/>
-                    <button class="search-btn"><i class="zmdi zmdi-search"></i></button>
-                </form>
-                <button class="shopping-cart"><i class="zmdi zmdi-shopping-cart"></i><span class="somethingIsInCart"></span></button>
-            </div>
-            <div class="col col-md-1 col-sm-1 col-1 hamburger">
+            <div class="col col-md-10 col-sm-10 col-10 hamburger notIndexPage">
                 <button id="hamburgerBtn"><i class="fas fa-bars"></i></button>
             </div>
             <div class="smallNavbar">
@@ -46,16 +39,63 @@
     <div class="main">
         <div class="container-fluid">
             <div class="our-services">
-                <div class="service biggest-block gaming-equipment" data-content="gaming">
+                <div class="service biggest-block gaming-equipment center" data-index="1" data-content="gaming">
                     <div class="text-content">
                         <h2>Gaming</h2>
                         <p>You want the best configuration , just visit our shop</p>
                         <a href="../index.html">See more..</a>
                     </div>
                 </div>
-                <div class="service smaller-block home-usage" data-content="office">
+                <div class="service smaller-block home-usage top" data-index="2" data-content="office">
+                    <div class="text-content">
+                        <h2>Office</h2>
+                        <p>You are tired of your old office computers? </br>Check out the latest products on sale</p>
+                        <a href="../index.html">See more..</a>
+                    </div>
                 </div>
-                <div class="service smaller-block office-equipment" data-content="home">
+                <div class="service smaller-block office-equipment bottom" data-index="3" data-content="home">
+                    <div class="text-content">
+                        <h2>Home</h2>
+                        <p>We also offer a wide range of products intended for personal use . So take a look </p>
+                        <a href="../index.html">See more..</a>
+                    </div>
+                </div>
+            </div>
+            <div class="service-information">
+                <h2>Information about our services</h2>
+                <div class="center-div d-flex justify-content-center align-items-center">
+                    <div class="arrow prevArrow">
+                        <button>
+                            <i class="fas fa-arrow-left"></i>
+                        </button>
+                    </div>
+                    <div class="info-content">
+                        <div class="col col-12 col-lg-3 single-info">
+                            <h3>Payment</h3>    
+                            <div class="central-icon"><i class="fas fa-credit-card"></i></div>      
+                            <p>You can pay by credit card or cash, payment is also possible upon delivery</p>
+                        </div>
+                        <div class="col col-12 col-lg-3 single-info">
+                            <h3>Delivery</h3>                    
+                            <div class="central-icon"><i class="fas fa-truck"></i></div>                
+                            <p>If you want, the products can be </br>delivered by our courier service</p>
+                        </div>
+                        <div class="col col-12 col-lg-3 single-info">
+                            <h3>Work hour</h3>                    
+                            <div class="central-icon"><i class="fas fa-clock"></i></div>          
+                            <p>During workweek, the store is open </br>from 8:00 am to 8:00 pm and on </br>weekends from 8:00 am to 2:00 pm</p>
+                        </div>
+                        <div class="col col-12 col-lg-3 single-info">
+                            <h3>Location</h3>                    
+                            <div class="central-icon"><i class="fas fa-globe"></i></div>                
+                            <p>If you want to see all locations</br> of our shops click <a href="contact.html">Here</a></p>
+                        </div>
+                    </div>
+                    <div class="arrow nextArrow">
+                        <button>
+                            <i class="fas fa-arrow-right"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>

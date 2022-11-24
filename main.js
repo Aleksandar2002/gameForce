@@ -1,7 +1,22 @@
 // PRELOADER
 window.addEventListener('load' , ()=>{
+    let headerHeight = window.getComputedStyle(document.querySelector('header')).getPropertyValue('height');
     document.querySelector('.preloader').classList.add('hide');
+    document.querySelector('.main').style.paddingTop = headerHeight; 
 })
+window.addEventListener('resize' , ()=>{
+    let headerHeight = window.getComputedStyle(document.querySelector('header')).getPropertyValue('height');
+    document.querySelector('.main').style.paddingTop = headerHeight; 
+})
+window.addEventListener('scroll' , ()=>{
+    let headerHeight = window.getComputedStyle(document.querySelector('header')).getPropertyValue('height');
+    let header = document.querySelector('header');
+
+    if(window.scrollY > parseInt(headerHeight) )
+    header.classList.add('semi-transparent');
+    if(window.scrollY < parseInt(headerHeight))
+    header.classList.remove('semi-transparent');
+});
 
 // CHANGE SLIDER IMAGE
 let previousBtn = document.querySelector('#previousBtn');
@@ -60,12 +75,16 @@ if(previousBtn){
 }
 
 let currentPage = window.location.href;
-currentPage = currentPage.substring(currentPage.lastIndexOf('/')+1 ,currentPage.lastIndexOf('.'));
-console.log(currentPage);
+currentPage = currentPage.substring(currentPage.lastIndexOf('/')+1);
+
+if(currentPage === ''){
+    currentPage = 'index';
+}else{
+    currentPage = currentPage.substring(0  , currentPage.lastIndexOf('.'));
+}
 
 
 // IF THE CURRENT PAGE IS INDEX HTML DO THIS
-console.log(currentPage);
 if(currentPage === 'index'){
     
     // CREATE DYNAMIC ELEMENTS
@@ -491,12 +510,13 @@ if(currentPage === 'index'){
         })
     }
 }else{
-    document.querySelector('.search-btn').addEventListener('click', e=>{e.preventDefault()});
+    // document.querySelector('.search-btn').addEventListener('click', e=>{e.preventDefault()});
 }
 if(currentPage === 'services'){
     const ourServicesDivs = document.querySelectorAll('.our-services .service');
     const serviceImages = new Array('20.jpg' ,'s6.jpg' ,'u8.jpg');
     const fadeIn = new Array({opacity : '0'}, {opacity : '1'});
+
     // ADDING BACKGROUND IMAGE FOR ALL SERVICE DIVS , AND ADDING EVENTLISTENER ON THEM
     ourServicesDivs.forEach((div , index) =>{
         // ADDING BACKGROUND IMAGE
@@ -504,37 +524,359 @@ if(currentPage === 'services'){
 
         // ADDING LAYER TO ALL SMALL BLOCKS
         if(div.classList.contains('smaller-block')){
-            div.appendChild(addLayer());
+            div.appendChild(addLayer(div.getAttribute('data-content')));
         }
         // EVENT LISTENER
         div.addEventListener('click' , ()=>{
             let divClasses = Array.from(div.classList);
 
             if(divClasses.includes('smaller-block')){
-                let biggest = document.querySelector('.biggest-block');
-                biggest.classList.remove('biggest-block');
-                biggest.classList.add('smaller-block');
-                biggest.animate(fadeIn , 2000);
 
-                biggest.appendChild(addLayer())
-
-                div.classList.remove('smaller-block')
-                div.classList.add('biggest-block');
-                div.animate(fadeIn , 1500);
-                div.querySelector('.layer').remove();
-                // div.appendChild(addLayer())
+                if(div.classList.contains('top')){
+                    swapServiceBlocks('top' , div)
+                }else{
+                    swapServiceBlocks('bottom', div);
+                }
             }
         })
     })
-    // FUNCTIONS 
-    function addLayer(){
+
+    let infoContent = document.querySelector('.info-content');
+    let singleInfos = Array.from(document.querySelectorAll('.single-info'));
+    let nextBtn = document.querySelector('.nextArrow');
+    let prevBtn = document.querySelector('.prevArrow');
+
+    //MOVE DIVS TO THE RIGHT SIDE
+    nextBtn.addEventListener('click' , e=>{
+        singleInfos.forEach(info =>{
+            // GET POSITON PROPERTIES FOR CURRENT INFO ELEMENT AND WHOLE INFOCONTENT DIV
+            let singleInfoPosition = info.getBoundingClientRect();
+            let infoContentPosition = infoContent.getBoundingClientRect();
+
+            if(singleInfoPosition.left < infoContentPosition.right && infoContentPosition.right  < singleInfoPosition.right){
+
+                let infoContentGap = getPropertyValue(infoContent , 'grid-column-gap')
+                let infoWidth = getPropertyValue(info , 'width')
+                
+                // CHECKING IF ANY OF INFODIVS IS OUT OF THE INFOCONTENT DIV
+                if(singleInfos.some(info=>{
+                    let infoPosition = info.getBoundingClientRect();
+                    if(infoPosition.left < infoContentPosition.left)return true;
+                })){
+                    tranlateSingleInfo(-(infoContentGap + infoWidth) , singleInfos);
+                }else{
+                    tranlateSingleInfo(0 , singleInfos)
+                }
+            }
+            
+        })
+    })
+    // MOVE DIVS TO THE LEFT SIDE
+    prevBtn.addEventListener('click' , e=>{
+        singleInfos.forEach(info =>{
+            let singleInfoPosition = info.getBoundingClientRect();
+            let infoContentPosition = infoContent.getBoundingClientRect();
+            
+            if(singleInfoPosition.left < infoContentPosition.left && infoContentPosition.left  < singleInfoPosition.right){
+
+                let infoContentGap = getPropertyValue(infoContent , 'grid-column-gap')
+                let infoWidth = getPropertyValue(info , 'width')
+                
+                if(singleInfos.some(info=>{
+                    let infoPosition = info.getBoundingClientRect();
+                    if(infoPosition.right > infoContentPosition.right)return true;
+                })){
+                    tranlateSingleInfo((infoContentGap + infoWidth) , singleInfos);
+                }else{
+                    tranlateSingleInfo(0 , singleInfos)
+                }
+            }
+            
+        })
+    })
+    window.addEventListener('scroll' , () =>{
+        if(window.innerHeight-100 > infoContent.getBoundingClientRect().top){
+
+            infoContent.classList.add('animate');
+        }else if(window.innerHeight/1.05 < infoContent.getBoundingClientRect().top){
+            infoContent.classList.remove('animate');
+        }
+    })
+
+    // FUNCTION THAT MOVES ALL SINGLE INFO DIVS
+    function tranlateSingleInfo(translateValue , items){
+        items.forEach(item =>{
+            item.style.transform = `translateX(${translateValue}px)`;
+        })
+    }
+    function getPropertyValue(element , propertyName) {
+        return parseInt(window.getComputedStyle(element).getPropertyValue(propertyName));
+    }
+    function addLayer(dataContent){
         let layer = document.createElement('div');
         layer.classList.add('layer');
         let p = document.createElement('p');
-        p.innerText = 'pera';
+        p.innerText = dataContent;
         layer.appendChild(p);
         return layer;
     }
+    function swapServiceBlocks(gridArea , currentDiv){
+        let biggest = document.querySelector('.biggest-block');
+
+        biggest.classList.remove('center');
+        biggest.classList.remove('biggest-block');
+        biggest.classList.add('smaller-block');
+        biggest.classList.add(gridArea);
+        biggest.animate(fadeIn , 2000);
+        biggest.appendChild(addLayer(biggest.getAttribute('data-content')));
+        
+        currentDiv.classList.remove(gridArea);
+        currentDiv.classList.remove('smaller-block');
+        currentDiv.classList.add('biggest-block');
+        currentDiv.classList.add('center');
+        currentDiv.animate(fadeIn , 1500);
+        currentDiv.querySelector('.layer').remove();
+    }
+}
+if(currentPage === 'contact'){
+
+    let formInputs = document.querySelectorAll('.contact-form .form-field input');
+
+    formInputs.forEach(input =>{
+        let parentFormField = input.parentElement;
+        
+        input.addEventListener('focus' , ()=>{
+            parentFormField.querySelector('label').classList.add('goUp');
+        })
+        input.addEventListener('blur' , ()=>{
+
+            if(input.value.length === 0){
+                parentFormField.querySelector('label').classList.remove('goUp');
+            } else{
+            }
+        })
+    })
+
+    let changeBtns = document.querySelectorAll('.change-section button');
+    changeBtns.forEach(btn =>{
+        btn.addEventListener('click' , (e)=>{
+            let currentBtn = e.target;
+            if(!currentBtn.classList.contains('active')){
+                changeActiveBtn(currentBtn);
+                let currentDataContent = currentBtn.getAttribute('data-content');
+                switch(currentDataContent){
+                    case 'company-info':{
+                        let companyInfoWidth = window.getComputedStyle(document.querySelector('.company-info')).getPropertyValue('width');
+                        document.querySelector('.info-form').style.transform = `translateX(${parseInt(0)}px)`;
+                        break;
+                    }
+                    case 'contact-form':{
+                        let contactFormWidth = window.getComputedStyle(document.querySelector('.contact-form')).getPropertyValue('width');
+                        document.querySelector('.info-form').style.transform = `translateX(-${parseInt(contactFormWidth)}px)`;
+                        break;
+                    }
+                }
+            }
+        })
+    })
+
+
+    let errors = new Array([],[],[],[],[]);
+    let submitIsDisabled = true;
+
+    formInputs.forEach((input , inputNumber) => {
+        input.addEventListener('input' , ()=>{
+            errors[inputNumber] = [];
+            let currentInput = input;
+            let currentInputValue = input.value;
+            switch(currentInput.getAttribute('name')){
+                case 'username':{
+                    if(!isNotEmpty(currentInputValue)){
+                        errors[inputNumber].push('The field must not be empty');
+                    }
+                    if(!isLongEnough(currentInputValue , 6)){
+                        errors[inputNumber].push('The field must be longer than 5 characters')
+                    }
+                    break;
+                }
+                case 'email':{
+                    if(!isNotEmpty(currentInputValue)){
+                        errors[inputNumber].push('The field must not be empty');
+                    }
+                    if(!isLongEnough(currentInputValue , 10)){
+                        errors[inputNumber].push('The field must be longer than 9 characters')
+                    }
+                    if(!isValidEmail(currentInputValue)){
+                        errors[inputNumber].push('Mail must be in this format: somename@gmail.com');
+                    }
+                    break;
+                }
+                case 'password':{
+                    if(!isNotEmpty(currentInputValue)){
+                        errors[inputNumber].push('The field must not be empty');
+                    }
+                    if(!isLongEnough(currentInputValue , 8)){
+                        errors[inputNumber].push('The field must be longer than 7 characters')
+                    }
+                    if(!isValidPassword(currentInputValue)){
+                        errors[inputNumber].push('Password must contain numbers , one small and one big latter')
+                    }
+                    errors[inputNumber+1].pop();
+                    if(!passwordIsMatching(document.querySelector('[name="confirmPassword"]').value)){
+                        errors[inputNumber+1].push('This field must be the same as field password');
+                    }
+                    break;
+                }
+                case 'confirmPassword':{
+                    if(!isNotEmpty(currentInputValue)){
+                        errors[inputNumber].push('The field must not be empty');
+                    }
+                    if(!isLongEnough(currentInputValue , 8)){
+                        errors[inputNumber].push('The field must be longer than 7 characters')
+                    }
+                    if(!passwordIsMatching(currentInputValue)){
+                        errors[inputNumber].push('This field must be the same as field password');
+                    }
+                    break;
+                }
+                case 'message':{
+                    if(!isNotEmpty(currentInputValue)){
+                        errors[inputNumber].push('The field must not be empty');
+                    }
+                    if(!isLongEnough(currentInputValue , 6)){
+                        errors[inputNumber].push('The field must be longer than 5 characters')
+                    }
+                    break;
+                }
+            }
+            errors.forEach(error=>{
+                let submitBtn = document.querySelector('[name="sendBtn"]');
+                if(error.length === 0){
+                    submitBtn.removeAttribute('disabled');
+                }else{
+                    submitBtn.setAttribute('disabled' , 'disabled');
+                }
+            })
+            showErrors();
+        })
+    })
+    let submitBtn = document.querySelector('[name="sendBtn"]');
+    submitBtn.addEventListener('click', e=>{
+        e.preventDefault();
+        ind = false;
+        formInputs.forEach(input =>{
+            if(!isNotEmpty(input.value)){
+                ind = true;
+            }
+            console.log(input);
+        })
+        console.log(ind);
+        if(!ind){
+            showFormModal();
+            document.querySelector('.contact-form form').reset();
+        }
+    })
+    let okBtn = document.querySelector('.popupForm #okBtn');
+    okBtn.addEventListener('click' , hideFormModal);
+
+    let closeBtn = document.querySelector('.popupForm #closeBtn');
+    closeBtn.addEventListener('click' , hideFormModal);
+
+    // FUNCTIONS
+    function isNotEmpty(inputValue) {
+        if(inputValue.length === 0)return false;
+        return true;
+    }
+    function isLongEnough(inputValue , requiredNumberOfCharacters) {
+        if(inputValue.length < requiredNumberOfCharacters)return false;
+        return true;
+    }
+    function isValidEmail(inputValue) {
+        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(inputValue))return true;
+        return false;
+    }
+    function isValidPassword(inputValue) {
+        let bigLatterBr = smallLatterBr = numBr = 0;
+        for(let i = 0 ; i < inputValue.length ; i++){
+            if(inputValue.charCodeAt(i) >= 48 && inputValue.charCodeAt(i) <= 57 )numBr++;
+            if(inputValue.charCodeAt(i) >= 65 && inputValue.charCodeAt(i) <= 90 )bigLatterBr++;
+            if(inputValue.charCodeAt(i) >= 97 && inputValue.charCodeAt(i) <= 122 )smallLatterBr++;
+        }
+
+        if(numBr && bigLatterBr && smallLatterBr)return true;
+        return false;
+    }
+    function passwordIsMatching(inputValue){
+        if(inputValue === document.querySelector('#password').value)return true;
+        else false;
+    }
+    function showErrors(){
+        // DELETE ALL SPANS IN FORM
+        for(let span of document.querySelectorAll('.contact-form span')){
+            span.remove();
+        }
+        // SHOW SPANS FOR EACH ELEMENT THAT HAS SOME ERRORS
+        for(let errorsForEachInput in errors){
+            errors[errorsForEachInput].forEach(error =>{
+                // CREATING SPAN
+                let span = document.createElement('span');
+                span.classList.add('error');
+                span.innerHTML = `${error}</br>`;
+
+                let parentDiv = formInputs[errorsForEachInput].parentElement;
+                parentDiv.appendChild(span);
+            })
+        }
+    }
+    function showFormModal(){
+        let modal = document.querySelector('.popupForm');
+        console.log(modal);
+        modal.classList.add('visible');
+    }
+    function hideFormModal(){
+        let modal = document.querySelector('.popupForm');
+        modal.classList.remove('visible');
+    }
+    function changeActiveBtn(current, allBtns){
+        document.querySelector('.change-section .active').classList.remove('active');
+        current.classList.add('active');
+    }
+}
+if(currentPage === 'aboutus'){
+    let ourOfficeDiv = document.querySelector('.our-office');
+    let colDivs = ourOfficeDiv.querySelectorAll('.col');
+    
+    colDivs.forEach(col =>{
+        let spans = col.querySelectorAll('span');
+        col.addEventListener('mouseover', e=>{
+            let rotationDeg = 8;
+            spans.forEach((span)=>{
+                if(rotationDeg !== 8){
+                    span.classList.add('back');
+                }
+                span.style.transform = `rotate(${rotationDeg}deg)`;
+                rotationDeg += 10;
+            })
+            let colImg = col.querySelector('img');
+            colImg.classList.add('smaller');
+            let pTag = col.querySelector('p');
+            let h3Tag = col.querySelector('h3');
+            pTag.classList.add('visible')
+            h3Tag.classList.add('visible')
+        })
+        col.addEventListener('mouseout', e=>{
+            spans.forEach(span=>{
+                span.style.transform = `rotate(0deg)`;
+            })
+            let pTag = col.querySelector('p');
+            let h3Tag = col.querySelector('h3');
+            pTag.classList.remove('visible')
+            h3Tag.classList.remove('visible')
+            let colImg = col.querySelector('img');
+            colImg.classList.remove('smaller');
+        })
+    })
+    
 }
 
 // CREATE HEADER NAV LIST

@@ -210,6 +210,9 @@
                     .col{
                         &.hamburger{
                             display: flex;
+                            &.notIndexPage{
+                                justify-content: flex-end;
+                            }
                             button{
                                 border: none;
                                 outline: none;
@@ -455,4 +458,4 @@
             }
         }
     }
-}
+}       
