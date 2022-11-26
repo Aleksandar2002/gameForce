@@ -1431,21 +1431,9 @@ html body .main .container-fluid .our-office .col .content img {
      object-fit: cover;
   -webkit-transition: .35s ease-in-out;
   transition: .35s ease-in-out;
-  -webkit-filter: invert(76%);
-          filter: invert(76%);
-  -webkit-filter: hue-rotate(40deg);
-          filter: hue-rotate(40deg);
-  -webkit-filter: opacity(25%);
-          filter: opacity(25%);
-  -webkit-filter: saturate(100%);
-          filter: saturate(100%);
-  -webkit-filter: sepia(0%);
-          filter: sepia(0%);
 }
 
 html body .main .container-fluid .our-office .col .content img.smaller {
-  -webkit-filter: sepia(65%);
-          filter: sepia(65%);
   height: 84%;
 }
 

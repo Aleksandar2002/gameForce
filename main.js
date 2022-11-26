@@ -509,8 +509,6 @@ if(currentPage === 'index'){
             }
         })
     }
-}else{
-    // document.querySelector('.search-btn').addEventListener('click', e=>{e.preventDefault()});
 }
 if(currentPage === 'services'){
     const ourServicesDivs = document.querySelectorAll('.our-services .service');
@@ -603,6 +601,7 @@ if(currentPage === 'services'){
         }
     })
 
+
     // FUNCTION THAT MOVES ALL SINGLE INFO DIVS
     function tranlateSingleInfo(translateValue , items){
         items.forEach(item =>{
@@ -679,10 +678,13 @@ if(currentPage === 'contact'){
             }
         })
     })
+    window.addEventListener('resize' , ()=>{
+        document.querySelector('.info-form').style.transform = 'translateX(0)';
+        changeActiveBtn(document.querySelector('#showInfo'))
+    })
 
 
     let errors = new Array([],[],[],[],[]);
-    let submitIsDisabled = true;
 
     formInputs.forEach((input , inputNumber) => {
         input.addEventListener('input' , ()=>{
@@ -837,7 +839,7 @@ if(currentPage === 'contact'){
         let modal = document.querySelector('.popupForm');
         modal.classList.remove('visible');
     }
-    function changeActiveBtn(current, allBtns){
+    function changeActiveBtn(current){
         document.querySelector('.change-section .active').classList.remove('active');
         current.classList.add('active');
     }

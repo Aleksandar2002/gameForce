@@ -1431,21 +1431,9 @@ html body .main .container-fluid .our-office .col .content img {
      object-fit: cover;
   -webkit-transition: .35s ease-in-out;
   transition: .35s ease-in-out;
-  -webkit-filter: invert(76%);
-          filter: invert(76%);
-  -webkit-filter: hue-rotate(40deg);
-          filter: hue-rotate(40deg);
-  -webkit-filter: opacity(25%);
-          filter: opacity(25%);
-  -webkit-filter: saturate(100%);
-          filter: saturate(100%);
-  -webkit-filter: sepia(0%);
-          filter: sepia(0%);
 }
 
 html body .main .container-fluid .our-office .col .content img.smaller {
-  -webkit-filter: sepia(65%);
-          filter: sepia(65%);
   height: 84%;
 }
 
@@ -2106,6 +2094,180 @@ html body .popupForm .content #closeBtn:hover {
     font-size: .97rem;
     padding: 3.6px 10px;
   }
+  html body .main .container-fluid .our-services {
+    height: 600px;
+    -ms-grid-columns: 1fr 1fr 350px;
+        grid-template-columns: 1fr 1fr 350px;
+  }
+  html body .main .container-fluid .our-services .biggest-block .text-content {
+    width: 65%;
+    max-width: 600px;
+    bottom: 5%;
+    right: 5%;
+    padding: 20px;
+  }
+  html body .main .container-fluid .our-services .biggest-block .text-content h2 {
+    font-size: 2.14rem;
+  }
+  html body .main .container-fluid .our-services .biggest-block .text-content p {
+    font-size: 1.1rem;
+  }
+  html body .main .container-fluid .our-services .biggest-block .text-content a {
+    font-size: 1rem;
+  }
+  html body .main .container-fluid .service-information {
+    min-height: 300px;
+    padding: 70px 0 70px 0;
+  }
+  html body .main .container-fluid .service-information h2 {
+    margin-bottom: 50px;
+    font-size: 1.83rem;
+  }
+  html body .main .container-fluid .service-information .info-content {
+    width: 700px;
+    padding: 40px 0;
+  }
+  html body .main .container-fluid .service-information .info-content .single-info {
+    padding: 19px 10px;
+    min-width: 200px;
+    width: 250px;
+    max-width: 330px;
+    min-height: 330px;
+  }
+  html body .main .container-fluid .service-information .info-content .single-info h3 {
+    font-size: 1.3rem;
+  }
+  html body .main .container-fluid .service-information .info-content .single-info .central-icon i {
+    padding: 16px 15px;
+    font-size: 1.69rem;
+  }
+  html body .main .container-fluid .service-information .info-content .single-info p {
+    font-size: .9rem;
+    line-height: 1.6rem;
+  }
+  html body .main .container-fluid .service-information .arrow button {
+    z-index: 100;
+    background-color: transparent;
+    top: 45%;
+    color: #66D7D1;
+    margin: 0 30px;
+    font-size: 1.8rem;
+    -webkit-transition: .24s ease-in-out;
+    transition: .24s ease-in-out;
+  }
+  html body .main .container-fluid .service-information .arrow button:hover {
+    color: #FC7753;
+  }
+  html body .main .container-fluid .service-information .arrow button.prevArrow {
+    left: -100px;
+  }
+  html body .main .container-fluid .service-information .arrow button.nextArrow {
+    right: -100px;
+  }
+  html body .main .container-fluid .our-office {
+    margin-bottom: 40px;
+    padding: 0 35px;
+  }
+  html body .main .container-fluid .our-office .col {
+    padding: 0;
+    min-width: 300px;
+    min-height: 300px;
+    height: 400px;
+  }
+  html body .main .container-fluid .our-office .col .content {
+    min-height: 300px;
+    width: 100%;
+    height: 400px;
+    padding: 8px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  html body .main .container-fluid .our-office .col .content img {
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+  }
+  html body .main .container-fluid .our-office .col .content img.smaller {
+    height: 84%;
+  }
+  html body .main .container-fluid .our-office .col .content h3 {
+    font-size: 1.2rem;
+    margin-top: 10px;
+  }
+  html body .main .container-fluid .our-office .col .content p {
+    font-size: .9rem;
+  }
+  html body .main .container-fluid .our-office .col span {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
+}
+
+@media screen and (max-width: 1078px) {
+  html body .main .container-fluid .our-office {
+    margin-bottom: 40px;
+    padding: 40px 105px;
+  }
+  html body .main .container-fluid .our-office .col {
+    padding: 0;
+    min-width: 270px;
+    min-height: 340px;
+    height: 300px;
+    margin: 35px 20px;
+  }
+  html body .main .container-fluid .our-office .col .content {
+    min-height: 300px;
+    width: 100%;
+    height: 340px;
+    padding: 8px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  html body .main .container-fluid .our-office .col .content img {
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+  }
+  html body .main .container-fluid .our-office .col .content img.smaller {
+    height: 84%;
+  }
+  html body .main .container-fluid .our-office .col .content h3 {
+    font-size: 1.2rem;
+    margin-top: 10px;
+  }
+  html body .main .container-fluid .our-office .col .content p {
+    font-size: .9rem;
+  }
+  html body .main .container-fluid .our-office .col span {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
 }
 
 @media screen and (max-width: 991px) {
@@ -2150,6 +2312,93 @@ html body .popupForm .content #closeBtn:hover {
     -webkit-box-pack: center;
         -ms-flex-pack: center;
             justify-content: center;
+  }
+  html body .main .container-fluid .service-information {
+    min-height: 300px;
+    padding: 60px 0 50px 0;
+  }
+  html body .main .container-fluid .service-information h2 {
+    margin-bottom: 30px;
+    font-size: 1.8rem;
+  }
+  html body .main .container-fluid .service-information .info-content {
+    width: 580px;
+    padding: 40px 0;
+  }
+  html body .main .container-fluid .service-information .info-content .single-info {
+    padding: 19px 10px 0 10px;
+    min-width: 200px;
+    width: 210px;
+    max-width: 330px;
+    min-height: 340px;
+  }
+  html body .main .container-fluid .service-information .info-content .single-info h3 {
+    font-size: 1.3rem;
+  }
+  html body .main .container-fluid .service-information .info-content .single-info .central-icon i {
+    padding: 14px 13px;
+    font-size: 1.62rem;
+  }
+  html body .main .container-fluid .service-information .info-content .single-info p {
+    font-size: .878rem;
+    line-height: 1.6rem;
+  }
+  html body .main .container-fluid .service-information .info-content br {
+    display: none;
+  }
+  html body .main .container-fluid .service-information .arrow button {
+    font-size: 1.5rem;
+  }
+  html body .main .container-fluid .contact {
+    margin: 0;
+    margin-top: 50px;
+    min-height: 650px;
+  }
+  html body .main .container-fluid .contact .col {
+    height: 600px;
+    padding: 0;
+  }
+  html body .main .container-fluid .contact .col:nth-child(1) {
+    height: 500px;
+  }
+  html body .main .container-fluid .contact .col .change-section {
+    width: 100%;
+    height: 20%;
+  }
+  html body .main .container-fluid .contact .col .info-form {
+    width: 200%;
+    min-height: 80%;
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 50% 50%;
+        grid-template-columns: 50% 50%;
+  }
+  html body .main .container-fluid .contact .col .info-form .company-info, html body .main .container-fluid .contact .col .info-form .contact-form {
+    width: 100% !important;
+    height: 100%;
+  }
+  html body .main .container-fluid .contact .col .info-form .company-info h4 {
+    font-size: 1.4rem;
+    margin-top: 30px;
+  }
+  html body .main .container-fluid .contact .col .info-form .company-info p {
+    font-size: 1rem;
+    color: #66D7D1;
+  }
+  html body .main .container-fluid .contact .col .info-form .contact-form {
+    padding-bottom: 20px;
+  }
+  html body .main .container-fluid .contact .col .info-form .contact-form form {
+    width: 45%;
+  }
+  html body .main .container-fluid .contact .col .info-form .contact-form form span {
+    font-size: .7rem;
+  }
+  html body .main .container-fluid .contact .col .info-form .contact-form form input, html body .main .container-fluid .contact .col .info-form .contact-form form textarea {
+    font-size: .8rem;
+  }
+  html body .main .container-fluid .contact .col .info-form .contact-form form .form-field {
+    margin: 20px 0;
   }
   html body .footer .container-fluid .wrapper {
     width: 100%;
@@ -2273,6 +2522,106 @@ html body .popupForm .content #closeBtn:hover {
     -webkit-transform: scale(2);
             transform: scale(2);
   }
+  html body .main .container-fluid .our-services {
+    height: 600px;
+    -ms-grid-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+    -ms-grid-rows: 1fr 200px;
+        grid-template-rows: 1fr 200px;
+        grid-template-areas: "center center" "top bottom";
+  }
+  html body .main .container-fluid .our-services .service .layer p {
+    padding: 3px 10px;
+    font-size: .9rem;
+  }
+  html body .main .container-fluid .our-services .bottom {
+    -ms-grid-row: 2;
+    -ms-grid-column: 2;
+    grid-area: bottom;
+  }
+  html body .main .container-fluid .our-services .top {
+    -ms-grid-row: 2;
+    -ms-grid-column: 1;
+    grid-area: top;
+  }
+  html body .main .container-fluid .our-services .center {
+    -ms-grid-row: 1;
+    -ms-grid-column: 1;
+    -ms-grid-column-span: 2;
+    grid-area: center;
+  }
+  html body .main .container-fluid .our-services .biggest-block .text-content {
+    width: 45%;
+    max-width: 600px;
+    bottom: 5%;
+    right: 2%;
+    padding: 15px;
+  }
+  html body .main .container-fluid .our-services .biggest-block .text-content h2 {
+    font-size: 1.95rem;
+  }
+  html body .main .container-fluid .our-services .biggest-block .text-content p {
+    font-size: .9rem;
+  }
+  html body .main .container-fluid .our-services .biggest-block .text-content a {
+    font-size: .95rem;
+  }
+  html body .main .container-fluid .our-office {
+    padding: 40px 105px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+  }
+  html body .main .container-fluid .our-office .col {
+    padding: 0;
+    min-width: 270px;
+    min-height: 340px;
+    height: 300px;
+    margin: 25px 20px;
+  }
+  html body .main .container-fluid .our-office .col .content {
+    min-height: 300px;
+    width: 100%;
+    height: 340px;
+    padding: 8px;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+  }
+  html body .main .container-fluid .our-office .col .content img {
+    border-radius: 5px;
+    width: 100%;
+    height: 100%;
+  }
+  html body .main .container-fluid .our-office .col .content img.smaller {
+    height: 84%;
+  }
+  html body .main .container-fluid .our-office .col .content h3 {
+    font-size: 1.1rem;
+    margin-top: 10px;
+  }
+  html body .main .container-fluid .our-office .col .content p {
+    font-size: .85rem;
+  }
+  html body .main .container-fluid .our-office .col span {
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -2284,6 +2633,98 @@ html body .popupForm .content #closeBtn:hover {
   }
   html body .main .container-fluid .slider .col .slide-text h2 {
     font-size: 1.16rem;
+  }
+  html body .main .container-fluid .service-information {
+    min-height: 300px;
+    padding: 60px 0 30px 0;
+  }
+  html body .main .container-fluid .service-information h2 {
+    margin-bottom: 15px;
+    font-size: 1.8rem;
+  }
+  html body .main .container-fluid .service-information .info-content {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+    width: 580px;
+    padding: 40px 0;
+  }
+  html body .main .container-fluid .service-information .info-content .single-info {
+    padding: 19px 10px 0 10px;
+    min-width: 200px;
+    width: 100%;
+    max-width: 330px;
+    min-height: 300px;
+    margin: 30px 0;
+    -webkit-transform: translateX(0) !important;
+            transform: translateX(0) !important;
+  }
+  html body .main .container-fluid .service-information .info-content .single-info h3 {
+    font-size: 1.4rem;
+  }
+  html body .main .container-fluid .service-information .info-content .single-info .central-icon i {
+    padding: 17px 16px;
+    font-size: 1.72rem;
+  }
+  html body .main .container-fluid .service-information .info-content .single-info p {
+    font-size: .92rem;
+    line-height: 1.6rem;
+  }
+  html body .main .container-fluid .service-information .arrow {
+    display: none;
+  }
+  html body .main .container-fluid .google-map {
+    height: auto;
+    width: 90%;
+  }
+  html body .main .container-fluid .google-map .col {
+    height: 80%;
+  }
+  html body .main .container-fluid .google-map .col iframe {
+    min-height: 350px;
+  }
+  html body .main .container-fluid .google-map .col h3 {
+    font-size: 1.23rem;
+    color: #FC7753;
+    line-height: 2.15rem;
+    margin-top: 30px;
+  }
+  html body .main .container-fluid .about-us {
+    min-height: 500px;
+  }
+  html body .main .container-fluid .about-us .col {
+    padding: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    font-family: 'Barlow', sans-serif;
+  }
+  html body .main .container-fluid .about-us .col h1 {
+    font-size: 2rem;
+  }
+  html body .main .container-fluid .about-us .col p {
+    max-width: 65%;
+    margin-top: 17px;
+    font-size: .95rem;
+    line-height: 1.67rem;
+  }
+  html body .main .container-fluid .about-us .col img {
+    margin-top: 30px;
+    width: 60%;
   }
 }
 
@@ -2314,9 +2755,97 @@ html body .popupForm .content #closeBtn:hover {
     width: 170px;
     height: 170px;
   }
+  html body .main .container-fluid .service-information {
+    min-height: 300px;
+    padding: 65px 0 20px 0;
+  }
+  html body .main .container-fluid .service-information h2 {
+    margin-bottom: 13px;
+    font-size: 1.68rem;
+  }
+  html body .main .container-fluid .service-information .info-content {
+    display: -ms-grid;
+    display: grid;
+    justify-items: center;
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+    width: 100%;
+    padding: 40px 0;
+  }
+  html body .main .container-fluid .service-information .info-content .single-info {
+    padding: 19px 10px 0 10px;
+    min-width: 200px;
+    width: 350px;
+    max-width: 400px;
+    min-height: 270px;
+    margin: 30px 0;
+    -webkit-transform: translateX(0) !important;
+            transform: translateX(0) !important;
+  }
+  html body .main .container-fluid .service-information .info-content .single-info h3 {
+    font-size: 1.3rem;
+  }
+  html body .main .container-fluid .service-information .info-content .single-info .central-icon i {
+    padding: 14px 13px;
+    font-size: 1.62rem;
+  }
+  html body .main .container-fluid .service-information .info-content .single-info p {
+    font-size: .89rem;
+    line-height: 1.6rem;
+  }
+  html body .main .container-fluid .service-information .arrow {
+    display: none;
+  }
 }
 
 @media screen and (max-width: 576px) {
+  html body .main .container-fluid .contact {
+    margin: 0;
+    margin-top: 50px;
+    min-height: 700px;
+  }
+  html body .main .container-fluid .contact .col {
+    height: 600px;
+    padding: 0;
+  }
+  html body .main .container-fluid .contact .col:nth-child(1) {
+    height: 400px;
+  }
+  html body .main .container-fluid .contact .col .info-form {
+    width: 200%;
+    min-height: 80%;
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 50% 50%;
+        grid-template-columns: 50% 50%;
+  }
+  html body .main .container-fluid .contact .col .info-form .company-info, html body .main .container-fluid .contact .col .info-form .contact-form {
+    width: 100% !important;
+    height: 100%;
+  }
+  html body .main .container-fluid .contact .col .info-form .company-info h4 {
+    font-size: 1.4rem;
+    margin-top: 30px;
+  }
+  html body .main .container-fluid .contact .col .info-form .company-info p {
+    font-size: 1rem;
+    color: #66D7D1;
+  }
+  html body .main .container-fluid .contact .col .info-form .contact-form {
+    padding-bottom: 20px;
+  }
+  html body .main .container-fluid .contact .col .info-form .contact-form form {
+    width: 56%;
+  }
+  html body .main .container-fluid .contact .col .info-form .contact-form form span {
+    font-size: .7rem;
+  }
+  html body .main .container-fluid .contact .col .info-form .contact-form form input, html body .main .container-fluid .contact .col .info-form .contact-form form textarea {
+    font-size: .8rem;
+  }
+  html body .main .container-fluid .contact .col .info-form .contact-form form .form-field {
+    margin: 20px 0;
+  }
   html body .footer {
     padding: 15px 0 30px 0;
   }
@@ -2356,6 +2885,42 @@ html body .popupForm .content #closeBtn:hover {
   html body .main .container-fluid .slider .arrow button {
     font-size: 4.6rem;
   }
+  html body .main .container-fluid .about-us {
+    min-height: 500px;
+  }
+  html body .main .container-fluid .about-us .col {
+    padding: 0;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: start;
+        -ms-flex-pack: start;
+            justify-content: flex-start;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-pack: center;
+        -ms-flex-pack: center;
+            justify-content: center;
+    font-family: 'Barlow', sans-serif;
+  }
+  html body .main .container-fluid .about-us .col h1 {
+    font-size: 1.94rem;
+  }
+  html body .main .container-fluid .about-us .col p {
+    max-width: 65%;
+    margin-top: 17px;
+    font-size: .9rem;
+    line-height: 1.67rem;
+  }
+  html body .main .container-fluid .about-us .col img {
+    margin-top: 20px;
+    width: 65%;
+  }
   html body .popup-cart .cart {
     padding: 30px 20px;
   }
@@ -2385,6 +2950,48 @@ html body .popupForm .content #closeBtn:hover {
   }
   html body .popup-cart .cart .totalPrice {
     font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  html body .main .container-fluid .service-information {
+    min-height: 300px;
+    padding: 65px 0 20px 0;
+  }
+  html body .main .container-fluid .service-information h2 {
+    margin-bottom: 13px;
+    font-size: 1.58rem;
+  }
+  html body .main .container-fluid .service-information .info-content {
+    display: -ms-grid;
+    display: grid;
+    justify-items: center;
+    -ms-grid-columns: 1fr;
+        grid-template-columns: 1fr;
+    width: 100%;
+    padding: 40px 0;
+  }
+  html body .main .container-fluid .service-information .info-content .single-info {
+    padding: 19px 10px 0 10px;
+    min-width: 200px;
+    width: 290px;
+    max-width: 400px;
+    min-height: 300px;
+    margin: 30px 0;
+  }
+  html body .main .container-fluid .service-information .info-content .single-info h3 {
+    font-size: 1.3rem;
+  }
+  html body .main .container-fluid .service-information .info-content .single-info .central-icon i {
+    padding: 14px 13px;
+    font-size: 1.62rem;
+  }
+  html body .main .container-fluid .service-information .info-content .single-info p {
+    font-size: .89rem;
+    line-height: 1.6rem;
+  }
+  html body .main .container-fluid .service-information .arrow {
+    display: none;
   }
 }
 /*# sourceMappingURL=responsive.css.map */

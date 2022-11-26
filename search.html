@@ -14,6 +14,7 @@
             width: calc(100vw - 0);
             height: 100vh;
             background-color: rgb(121, 121, 121);
+            margin-bottom: 240px;
         }
         .container{
             height: 100vh;
@@ -111,9 +112,15 @@
         <p>1</p>
     </div>
 
-    <div class="paralax">
+    <!-- <div class="paralax">
 
-    </div>
+    </div> -->
+
+    <select name="ddlista" id="ddlista">
+        <option value="opt1">Option 1</option>
+        <option value="opt2">Option 2</option>
+        <option value="opt3">Option 3</option>
+    </select>
     <script type="text/javascript">
         /* let slides = document.querySelectorAll('.slide');
         let leftArr= document.querySelector('.left')
@@ -241,6 +248,22 @@
         let nizb =  new Array('pera' , 'mika' , 'zika')
         let niza = nizb.sort(); // menja niz
         console.log(niza);
+
+        let ddlista = document.querySelector('#ddlista');
+        console.log(ddlista);
+        ddlista.addEventListener('change', (e)=>{
+            console.log(ddlista.value);
+            console.log(e.target.value);
+        })
+
+        // let regExpres = /^[A-ZŠĐĆČŽ]$/;
+        let regExpres = /^\w{5,30}@\w{3,6}\.\w{1,4}$/;
+
+        let someString = 'sasds@gmail.asd';
+        console.log(regExpres.test(someString));
+
+
+
     </script>
 </body>
 </html>
