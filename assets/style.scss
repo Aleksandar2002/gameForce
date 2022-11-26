@@ -942,11 +942,11 @@ html{
                             min-height: 300px;
                             width: 100%;
                             height: 400px;
-                            background-color: $orange;
+                            background-color: $blue;
                             padding: 8px;
                             @include flexcol();
                             border-radius: 5px;
-                            box-shadow: 0 0 5px $orange;
+                            box-shadow: 0 0 5px $blue;
                             position: relative;
                             z-index: 10;
                             overflow: hidden;
@@ -960,14 +960,13 @@ html{
                                     height: 84%;
                                 }
                             }
+                            color: $black;
                             h3{
                                 font-size: 1.2rem;
-                                color: $black;
                                 margin-top: 10px;
                             }
                             p{
                                 font-size: .9rem;
-                                color: $black;
                             }
                             h3,p{
                                 opacity: 0;
@@ -983,14 +982,80 @@ html{
                             width: 100%;
                             border-radius: 5px;
                             height: 100%;
-                            background-color: $blue;
+                            background-color: #292b40;
+                            background-color: #57aaa6;
                             background-color: #fa8464;
+                            background-color: #cf6b4f;
                             box-shadow: 0 0 4px $black;
                             top: 0;
                             left: 0;
                             transition: .3s ease-in-out;
                             &.back{
                                 z-index: 2;
+                            }
+                        }
+                    }
+                }
+                .author{
+                    margin: 40px auto;
+                    @include flexbox();
+                    height: 600px;
+                    border-radius: 5px;
+                    padding: 70px 50px;
+                    .col{
+                        @include flexcol();
+                        justify-content: center;
+                        height: 83%;
+                        position: relative;
+                        img{
+                            border-radius: 6px;
+                            filter: saturate(88%);
+                            width: auto;
+                            height: 100%;
+                            box-shadow: 0 0 10px $black;
+                            position: relative;
+                            z-index: 11;
+                            transform: skew(-1deg);
+                        }
+                        // .layer{
+                        //     position: absolute;
+                        //     height: 103%;
+                        //     width: 35.5%;
+                        //     background-color: $orange;
+                        //     top: 0;
+                        //     left: 30%;
+                        //     z-index: 10;
+                        //     border-radius: 6px;
+                        //     transform: translate(6px ,-12px)
+                        //     skew(-2deg);
+                        // }
+                        color: $blue;
+                        h1{
+                            font-size: 2rem;
+                            color: $orange;
+                            margin-bottom: 50px;
+                        }
+                        p{
+                            line-height: 1.7rem;
+                        }
+                        a{
+                            color: $blue;
+                            background-color: $black;
+                            box-shadow: 0 0 5px $blue;
+                            font-size: 1rem;
+                            padding: 5px 15px;
+                            border-radius: 4px;
+                            transition: .25s ease-in-out;
+                            margin: 10px 0;
+                            &:nth-of-type(1){
+                                margin-top: 40px;
+                            }
+                            // border: 1px solid $blue;
+                            &:hover{
+                                // border: 1px solid $orange;
+                                background-color: $orange;
+                                box-shadow: 0 0 5px $orange;
+                                color: $black;
                             }
                         }
                     }
