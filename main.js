@@ -512,7 +512,7 @@ if(currentPage === 'index'){
 }
 if(currentPage === 'services'){
     const ourServicesDivs = document.querySelectorAll('.our-services .service');
-    const serviceImages = new Array('20.jpg' ,'s6.jpg' ,'u8.jpg');
+    const serviceImages = new Array('gaming.jpg' ,'office.jpg' ,'home.jpg');
     const fadeIn = new Array({opacity : '0'}, {opacity : '1'});
 
     // ADDING BACKGROUND IMAGE FOR ALL SERVICE DIVS , AND ADDING EVENTLISTENER ON THEM
@@ -678,9 +678,13 @@ if(currentPage === 'contact'){
             }
         })
     })
+    let lastWindowWidth = window.innerWidth;
     window.addEventListener('resize' , ()=>{
-        document.querySelector('.info-form').style.transform = 'translateX(0)';
-        changeActiveBtn(document.querySelector('#showInfo'))
+        if(lastWindowWidth !== window.innerWidth){
+            document.querySelector('.info-form').style.transform = 'translateX(0)';
+            changeActiveBtn(document.querySelector('#showInfo'));
+            lastWindowWidth = window.innerWidth;
+        }
     })
 
 

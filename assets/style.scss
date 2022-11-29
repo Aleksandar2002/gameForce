@@ -743,7 +743,7 @@ html{
                             }
                         }
                         &:nth-of-type(2){
-                            background-image: url('img/contact/back3.jpg');
+                            background-image: url('img/contact/background.jpg');
                             background-position: center;
                             background-size: cover;
                         }
@@ -927,10 +927,16 @@ html{
                 }
                 .our-office{
                     margin-bottom: 40px;
-                    padding: 0 35px;
+                    padding: 50px 35px;
                     @include flexbox();
                     border-radius: 5px;
                     justify-content: space-between;
+                    h1{
+                        text-align: center;
+                        font-size: 2.2rem;
+                        margin-bottom: 20px;
+                        color: $orange;
+                    }
                     .col{  
                         position: relative;
                         padding: 0;
@@ -983,9 +989,9 @@ html{
                             border-radius: 5px;
                             height: 100%;
                             background-color: #292b40;
-                            background-color: #57aaa6;
                             background-color: #fa8464;
                             background-color: #cf6b4f;
+                            background-color: #57aaa6;
                             box-shadow: 0 0 4px $black;
                             top: 0;
                             left: 0;

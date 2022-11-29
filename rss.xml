@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+    <chanel>
+        <title>Latest news and discounts</title>
+        <description>Official and latest company news</description>
+        <link>https://aleksandar2002.github.io/gameForce/index.html</link>
+        <item>
+            <title>New cooperation with RedDragon</title>
+            <description>We signed a new contract with the Red dragon company that lasts until 2025.</description>
+            <link>https://aleksandar2002.github.io/gameForce/index.html</link>
+        </item>
+        <item>
+            <title>Online discount</title>
+            <description>If you order our products through our website, you get a 10% discount. </description>
+            <link>https://aleksandar2002.github.io/gameForce/pages/contact.html</link>
+        </item>
+        <item>
+            <title>Free delivery</title>
+            <description>If your bill is more than $20 you get free delivery whatever is your location.</description>
+            <link>https://aleksandar2002.github.io/gameForce/pages/services.html</link>
+        </item>
+    </chanel>
+</rss>

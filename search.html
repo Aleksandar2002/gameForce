@@ -252,16 +252,20 @@
         let ddlista = document.querySelector('#ddlista');
         console.log(ddlista);
         ddlista.addEventListener('change', (e)=>{
-            console.log(ddlista.value);
+            // console.log(ddlista.value);
             console.log(e.target.value);
+            console.log(ddlista.options[ddlista.selectedIndex].value); 
         })
 
         // let regExpres = /^[A-ZŠĐĆČŽ]$/;
-        let regExpres = /^\w{5,30}@\w{3,6}\.\w{1,4}$/;
+        // let regExpres = /^\w{5,30}@\w{3,6}\.\w{1,4}$/;
 
-        let someString = 'sasds@gmail.asd';
+        let regExpres2 = /^[^4-9]?[4-5]? [A-R]{1,5}[a-e]+$/;
+        let regExpres = /[a-z]|[asd]/;
+
+        // let someString = 'sasds@gmail.asd';
+        let someString = '';
         console.log(regExpres.test(someString));
-
 
 
     </script>
