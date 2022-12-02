@@ -91,6 +91,55 @@
             position: absolute;
             z-index: 1;
         }
+        .containerHam{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: absolute;
+            right: 0;
+            top: 20%;
+        }
+        .containerHam .hamburger{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            background-color: rgb(73, 164, 206);
+            width: 80px;
+            height: 80px;
+            cursor: pointer;
+
+        }
+        .hamburger div{
+            background-color: #ededed;
+            width: 40px;
+            margin: 4px ;
+            height: 4px;
+            transition: .3s ease-in-out;
+        }
+        .hamburger.close div:nth-child(2){
+            background-color: red;
+            animation: fadeLeft .4s;
+        }
+        .hamburger.close div:nth-child(1){
+            background-color: blue;
+            transform: translateY(12px) rotate(45deg) ;
+        }
+        .hamburger.close div:nth-child(3){
+            background-color: blue;
+            transform: translateY(-12px) rotate(-45deg) ;
+        }
+        @keyframes fadeLeft {
+            from{
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to{
+                transform: translateX(-200px);
+                opacity: 0;
+            }
+        }
+        transform: translateX(-300px);
     </style>
 </head>
 <body>
@@ -121,6 +170,14 @@
         <option value="opt2">Option 2</option>
         <option value="opt3">Option 3</option>
     </select>
+
+    <div class="containerHam">
+        <div class="hamburger close">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>
     <script type="text/javascript">
         /* let slides = document.querySelectorAll('.slide');
         let leftArr= document.querySelector('.left')

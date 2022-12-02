@@ -1070,7 +1070,7 @@
                                 width: 65%;
                             }
                         }
-                    }
+                    }   
                 }
             }
             .popup-cart{
@@ -1089,8 +1089,11 @@
                                 font-size: .9rem;
                             }
                             input{
-                                width: 35px;
+                                width: 100%;
                                 font-size: .9rem;
+                            }
+                            .quantityInputDiv{
+                                width:50px;
                             }
                             .deleteBtn{
                                 font-size: .9rem;

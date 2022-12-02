@@ -255,6 +255,25 @@ if(currentPage === 'index'){
         }
 
     })
+    window.addEventListener('scroll' , ()=>{
+        // ANIMATE PRODUCTS ARTICLE
+        let products = document.querySelectorAll('article.product');
+        products.forEach(product=>{
+            if(window.innerHeight-100 > product.getBoundingClientRect().top){
+                product.classList.add('animate');
+            }else if(window.innerHeight/1.05 < product.getBoundingClientRect().top){
+                product.classList.remove('animate');
+            }
+        })
+
+        let filter = document.querySelector('#filter');
+        if(window.innerHeight-100 > filter.getBoundingClientRect().top){
+            filter.classList.add('animate');
+        }else if(window.innerHeight/1.05 < filter.getBoundingClientRect().top){
+            filter.classList.remove('animate');
+        }
+
+    })
 
     // FUNCTIONS
     function Product(name , src , price ,type){
@@ -383,26 +402,41 @@ if(currentPage === 'index'){
         input.setAttribute('min' , '1');
         input.setAttribute('max' , '20');
         input.setAttribute('onkeydown' , 'return false');
-        input.setAttribute('onchange', 'changeProductsNumberAndPriceInCartList(event)');
+        // input.setAttribute('onchange', 'changeProductsNumberAndPriceInCartList(event)');
         let button = document.createElement('button');
         button.innerHTML = '<i class="fas fa-trash"></i>';
         button.classList.add('deleteBtn');
         button.setAttribute('onclick' , 'deleteProductFromCartList(event)');
-    
+
+        let inputDiv = document.createElement('div')
+        inputDiv.classList.add('quantityInputDiv');
+        let buttonAdd = document.createElement('button');
+        buttonAdd.classList.add('increment');
+        buttonAdd.innerHTML = '<i class="fas fa-caret-up"></i>';
+        buttonAdd.setAttribute('onclick' , 'incrementCartInput(event)');
+        let buttonSubstract = document.createElement('button');
+        buttonSubstract.classList.add('decrement');
+        buttonSubstract.innerHTML = '<i class="fas fa-caret-down"></i>'
+        buttonSubstract.setAttribute('onclick' , 'decrementCartInput(event)');
+
+        inputDiv.appendChild(input);
+        inputDiv.appendChild(buttonAdd);
+        inputDiv.appendChild(buttonSubstract);
+
         // ADDING ELEMENTS TO THEIR PARENTS
         li.appendChild(p1);
         li.appendChild(p2);
-        li.appendChild(input);
+        li.appendChild(inputDiv);
         li.appendChild(button);
         list.appendChild(li);
     }
-    function changeProductsNumberAndPriceInCartList(e){
+    function changeProductsNumberAndPriceInCartList(){
         let quantInputs = popupCart.querySelectorAll('.quantity');
         productNum= totalPrice = 0;
     
         quantInputs.forEach(quant =>{
             productNum += +quant.value;
-            let parentLi = quant.parentElement;
+            let parentLi = quant.closest('li');
             let currentProductPrice = parentLi.querySelector('[data-content="price"]').textContent.substring(1);
             totalPrice += quant.value * currentProductPrice;
         })
@@ -508,6 +542,24 @@ if(currentPage === 'index'){
                 newArray.push(product);
             }
         })
+    }
+    function decrementCartInput(e){
+        let parentDiv = e.target.closest('.quantityInputDiv');
+        let quantValue= parentDiv.querySelector('.quantity').value;
+        if(quantValue != 1){
+            quantValue = +quantValue-1;
+        }
+        parentDiv.querySelector('.quantity').value = quantValue;
+        changeProductsNumberAndPriceInCartList();
+    }
+    function incrementCartInput(e){
+        let parentDiv = e.target.closest('.quantityInputDiv');
+        let quantValue= parentDiv.querySelector('.quantity').value;
+        if(quantValue != 20){
+            quantValue = +quantValue+1;
+        }
+        parentDiv.querySelector('.quantity').value = quantValue;
+        changeProductsNumberAndPriceInCartList();
     }
 }
 if(currentPage === 'services'){
@@ -692,40 +744,29 @@ if(currentPage === 'contact'){
 
     formInputs.forEach((input , inputNumber) => {
         input.addEventListener('input' , ()=>{
+            let regExp;
             errors[inputNumber] = [];
             let currentInput = input;
             let currentInputValue = input.value;
             switch(currentInput.getAttribute('name')){
                 case 'username':{
-                    if(!isNotEmpty(currentInputValue)){
-                        errors[inputNumber].push('The field must not be empty');
-                    }
-                    if(!isLongEnough(currentInputValue , 6)){
-                        errors[inputNumber].push('The field must be longer than 5 characters')
+                    regExp = /^[A-z][A-z0-9\_\.]{5,20}$/
+                    if(!checkRegExp(currentInputValue , regExp)){
+                        errors[inputNumber].push('Mimimal length is 6. Needs to start with latter . Allowed characters . and _');
                     }
                     break;
                 }
                 case 'email':{
-                    if(!isNotEmpty(currentInputValue)){
-                        errors[inputNumber].push('The field must not be empty');
-                    }
-                    if(!isLongEnough(currentInputValue , 10)){
-                        errors[inputNumber].push('The field must be longer than 9 characters')
-                    }
-                    if(!isValidEmail(currentInputValue)){
-                        errors[inputNumber].push('Mail must be in this format: somename@gmail.com');
+                    regExp = /^[a-z0-9\-\_\.]{4,30}@(yahoo.com|gmail.com)$/
+                    if(!checkRegExp(currentInputValue , regExp)){
+                        errors[inputNumber].push('Invalid format. Example name@gmail.com(or yahoo)');
                     }
                     break;
                 }
                 case 'password':{
-                    if(!isNotEmpty(currentInputValue)){
-                        errors[inputNumber].push('The field must not be empty');
-                    }
-                    if(!isLongEnough(currentInputValue , 8)){
-                        errors[inputNumber].push('The field must be longer than 7 characters')
-                    }
-                    if(!isValidPassword(currentInputValue)){
-                        errors[inputNumber].push('Password must contain numbers , one small and one big latter')
+                    regExp = /^[A-z0-9\@\#\$\.\_]{8,20}$/
+                    if((!checkRegExp(currentInputValue , regExp)) || (!checkRegExp(currentInputValue , /[A-Z]+/)) || (!checkRegExp(currentInputValue , /[a-z]+/)) || (!checkRegExp(currentInputValue , /[$\._@#]+/)) || (!checkRegExp(currentInputValue , /[0-9]+/))){
+                        errors[inputNumber].push('Minimal length is 8. Needs to contain one small and big letter, one symbol($ . _ # @) and numbers');
                     }
                     errors[inputNumber+1].pop();
                     if(!passwordIsMatching(document.querySelector('[name="confirmPassword"]').value)){
@@ -734,83 +775,79 @@ if(currentPage === 'contact'){
                     break;
                 }
                 case 'confirmPassword':{
-                    if(!isNotEmpty(currentInputValue)){
-                        errors[inputNumber].push('The field must not be empty');
-                    }
-                    if(!isLongEnough(currentInputValue , 8)){
-                        errors[inputNumber].push('The field must be longer than 7 characters')
-                    }
                     if(!passwordIsMatching(currentInputValue)){
                         errors[inputNumber].push('This field must be the same as field password');
                     }
                     break;
                 }
                 case 'message':{
-                    if(!isNotEmpty(currentInputValue)){
-                        errors[inputNumber].push('The field must not be empty');
-                    }
-                    if(!isLongEnough(currentInputValue , 6)){
-                        errors[inputNumber].push('The field must be longer than 5 characters')
+                    regExp = /^[A-Z][A-z0-9\_\.]{10,60}$/
+                    if(!checkRegExp(currentInputValue , regExp)){
+                        errors[inputNumber].push('Mimimal length is 11. Needs to start with big latter . Allowed characters (. , ! ?)');
                     }
                     break;
                 }
             }
-            errors.forEach(error=>{
-                let submitBtn = document.querySelector('[name="sendBtn"]');
-                if(error.length === 0){
-                    submitBtn.removeAttribute('disabled');
-                }else{
-                    submitBtn.setAttribute('disabled' , 'disabled');
-                }
-            })
             showErrors();
+            let spans = document.querySelectorAll('.contact-form form span');
+            if(!isNotEmpty() || spans.length > 0 ){
+                submitBtn.setAttribute('disabled' , 'disabled');
+            }else{
+                submitBtn.removeAttribute('disabled');
+            }
         })
     })
+
     let submitBtn = document.querySelector('[name="sendBtn"]');
     submitBtn.addEventListener('click', e=>{
         e.preventDefault();
-        ind = false;
-        formInputs.forEach(input =>{
-            if(!isNotEmpty(input.value)){
-                ind = true;
-            }
-            console.log(input);
+        showFormModal();
+        document.querySelector('.contact-form form').reset();
+        document.querySelectorAll('label').forEach(label =>{
+            label.classList.remove('goUp');
         })
-        console.log(ind);
-        if(!ind){
-            showFormModal();
-            document.querySelector('.contact-form form').reset();
-        }
     })
+
     let okBtn = document.querySelector('.popupForm #okBtn');
     okBtn.addEventListener('click' , hideFormModal);
 
     let closeBtn = document.querySelector('.popupForm #closeBtn');
     closeBtn.addEventListener('click' , hideFormModal);
 
-    // FUNCTIONS
-    function isNotEmpty(inputValue) {
-        if(inputValue.length === 0)return false;
-        return true;
-    }
-    function isLongEnough(inputValue , requiredNumberOfCharacters) {
-        if(inputValue.length < requiredNumberOfCharacters)return false;
-        return true;
-    }
-    function isValidEmail(inputValue) {
-        if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(inputValue))return true;
-        return false;
-    }
-    function isValidPassword(inputValue) {
-        let bigLatterBr = smallLatterBr = numBr = 0;
-        for(let i = 0 ; i < inputValue.length ; i++){
-            if(inputValue.charCodeAt(i) >= 48 && inputValue.charCodeAt(i) <= 57 )numBr++;
-            if(inputValue.charCodeAt(i) >= 65 && inputValue.charCodeAt(i) <= 90 )bigLatterBr++;
-            if(inputValue.charCodeAt(i) >= 97 && inputValue.charCodeAt(i) <= 122 )smallLatterBr++;
-        }
+    let showPassBtns = document.querySelectorAll('.show');
+    showPassBtns.forEach(btn=>{
+        btn.addEventListener('click', (e)=>{
+            e.preventDefault();
+            let input = btn.parentElement.querySelector('input');
+            input.type = input.getAttribute('type')=== 'password'?'text':'password';
+        })
+    })
 
-        if(numBr && bigLatterBr && smallLatterBr)return true;
-        return false;
+    window.addEventListener('scroll' , ()=>{
+        // ANIMATE MAP DIV
+
+        let map = document.querySelector('.google-map .col');
+
+        if(window.innerHeight-100 > map.getBoundingClientRect().top){
+            map.classList.add('animate');
+        }else if(window.innerHeight/1.05 < map.getBoundingClientRect().top){
+            map.classList.remove('animate');
+        }
+    
+    })
+
+    // FUNCTIONS
+    function isNotEmpty() {
+        let inputs = document.querySelectorAll('.contact-form .form-field input');
+        for(let elem of inputs){
+            if(elem.value.length === 0){
+                return false;
+            }
+        }
+        return true;
+    }
+    function checkRegExp(inputValue , regExp){
+        return regExp.test(inputValue)
     }
     function passwordIsMatching(inputValue){
         if(inputValue === document.querySelector('#password').value)return true;
@@ -827,7 +864,7 @@ if(currentPage === 'contact'){
                 // CREATING SPAN
                 let span = document.createElement('span');
                 span.classList.add('error');
-                span.innerHTML = `${error}</br>`;
+                span.innerHTML = `${error}<br/>`;
 
                 let parentDiv = formInputs[errorsForEachInput].parentElement;
                 parentDiv.appendChild(span);
@@ -836,7 +873,6 @@ if(currentPage === 'contact'){
     }
     function showFormModal(){
         let modal = document.querySelector('.popupForm');
-        console.log(modal);
         modal.classList.add('visible');
     }
     function hideFormModal(){
@@ -883,6 +919,18 @@ if(currentPage === 'aboutus'){
         })
     })
     
+    
+    window.addEventListener('scroll' , ()=>{
+        // ANIMATE OUR OFFICE COL DIVS
+
+        colDivs.forEach(col=>{
+            if(window.innerHeight-100 > col.getBoundingClientRect().top){
+                col.classList.add('animate');
+            }else if(window.innerHeight/1.05 < col.getBoundingClientRect().top){
+                col.classList.remove('animate');
+            }
+        })
+    })
 }
 
 // CREATE HEADER NAV LIST
@@ -907,12 +955,20 @@ let smallNavbarNavTag = document.querySelector('.smallNavbar nav');
 createNavList(smallNavbarNavTag);
 
 hamburgerBtn.addEventListener('click' , ()=>{
+    let divs = hamburgerBtn.querySelectorAll('div');
     if(hamburgerIndex){
         smallNavbarNavTag.parentElement.style.width = '0' ;
         hamburgerIndex = false;
+        divs[0].classList.remove('top');
+        divs[1].classList.remove('fadeLeft');
+        divs[2].classList.remove('bottom');
     } else{
         hamburgerIndex = true;
-        smallNavbarNavTag.parentElement.style.width = '200px' ;
+        smallNavbarNavTag.parentElement.style.width = '200px';
+        divs[0].classList.add('top');
+        divs[1].classList.add('fadeLeft');
+        divs[2].classList.add('bottom');
+
     }
 })
 

@@ -100,6 +100,37 @@ html body header .row .col.hamburger {
       -ms-flex-align: center;
           align-items: center;
   display: none;
+  padding: 10px;
+}
+
+html body header .row .col.hamburger div {
+  width: 25px;
+  height: 3px;
+  margin: 4px;
+  background-color: #2D3047;
+  border-radius: 5px;
+  -webkit-transition: .3s ease-in-out;
+  transition: .3s ease-in-out;
+}
+
+html body header .row .col.hamburger div.top {
+  -webkit-transform: translateY(8px) rotate(45deg);
+          transform: translateY(8px) rotate(45deg);
+}
+
+html body header .row .col.hamburger div.bottom {
+  -webkit-transform: translateY(-6px) rotate(-45deg);
+          transform: translateY(-6px) rotate(-45deg);
+}
+
+html body header .row .col.hamburger div.fadeLeft {
+  -webkit-transform: translateX(-150px);
+          transform: translateX(-150px);
+  opacity: 0;
+}
+
+html body header .row .col.hamburger button:hover div {
+  background-color: #66D7D1;
 }
 
 html body header .row .col.navbar {
@@ -478,6 +509,13 @@ html body .main .container-fluid .wrapper .filter {
           animation-name: fadeIn;
   -webkit-animation-duration: 1.5s;
           animation-duration: 1.5s;
+  -webkit-transition: 1s ease-in-out;
+  transition: 1s ease-in-out;
+  opacity: 0;
+}
+
+html body .main .container-fluid .wrapper .filter.animate {
+  opacity: 1;
 }
 
 html body .main .container-fluid .wrapper .filter h3 {
@@ -642,12 +680,19 @@ html body .main .container-fluid .wrapper section.products article.product {
   border-radius: 5px;
   -webkit-box-shadow: 0 0 6px #FC7753;
           box-shadow: 0 0 6px #FC7753;
-  -webkit-transition: .2s ease-in-out;
-  transition: .2s ease-in-out;
+  -webkit-transition: opacity .7s ease-in-out ,-webkit-box-shadow .2s ease-in-out;
+  transition: opacity .7s ease-in-out ,-webkit-box-shadow .2s ease-in-out;
+  transition: box-shadow .2s ease-in-out ,opacity .7s ease-in-out;
+  transition: box-shadow .2s ease-in-out ,opacity .7s ease-in-out ,-webkit-box-shadow .2s ease-in-out;
   -webkit-animation-name: fadeIn;
           animation-name: fadeIn;
   -webkit-animation-duration: 1.15s;
           animation-duration: 1.15s;
+  opacity: 0;
+}
+
+html body .main .container-fluid .wrapper section.products article.product.animate {
+  opacity: 1;
 }
 
 html body .main .container-fluid .wrapper section.products article.product:hover {
@@ -1210,6 +1255,22 @@ html body .main .container-fluid .contact .col .info-form .contact-form form .fo
   margin: 30px 0;
 }
 
+html body .main .container-fluid .contact .col .info-form .contact-form form .form-field .show {
+  background-color: transparent;
+  color: #66D7D1;
+  position: absolute;
+  right: 5px;
+  top: 5px;
+  font-size: .9rem;
+  padding: 0;
+  -webkit-transition: .24s ease-in-out;
+  transition: .24s ease-in-out;
+}
+
+html body .main .container-fluid .contact .col .info-form .contact-form form .form-field .show:hover {
+  color: #FC7753;
+}
+
 html body .main .container-fluid .contact .col .info-form .contact-form form .buttons {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1287,6 +1348,13 @@ html body .main .container-fluid .google-map .col h3 {
 
 html body .main .container-fluid .google-map .col:first-child {
   position: relative;
+  opacity: 0;
+  -webkit-transition: .8s ease-in-out;
+  transition: .8s ease-in-out;
+}
+
+html body .main .container-fluid .google-map .col:first-child.animate {
+  opacity: 1;
 }
 
 html body .main .container-fluid .google-map .col:first-child::before {
@@ -1401,6 +1469,13 @@ html body .main .container-fluid .our-office .col {
   min-width: 300px;
   min-height: 300px;
   height: 400px;
+  opacity: 0;
+  -webkit-transition: .7s ease-in-out;
+  transition: .7s ease-in-out;
+}
+
+html body .main .container-fluid .our-office .col.animate {
+  opacity: 1;
 }
 
 html body .main .container-fluid .our-office .col .content {
@@ -1730,7 +1805,7 @@ html body .popup-cart {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 10;
+  z-index: 201;
   background-color: rgba(64, 61, 88, 0.9);
   margin: 0;
   padding: 0;
@@ -1809,7 +1884,7 @@ html body .popup-cart .cart ul li {
 }
 
 html body .popup-cart .cart ul li input {
-  width: 50px;
+  width: 100%;
   border-radius: 2px;
   background-color: #FC7753;
   color: #2D3047;
@@ -1823,6 +1898,11 @@ html body .popup-cart .cart ul li input {
 
 html body .popup-cart .cart ul li input:hover, html body .popup-cart .cart ul li input:focus {
   background-color: #66D7D1;
+}
+
+html body .popup-cart .cart ul li input[type=number]::-webkit-inner-spin-button,
+html body .popup-cart .cart ul li input[type=number]::-webkit-outer-spin-button {
+  opacity: 0;
 }
 
 html body .popup-cart .cart ul li p {
@@ -1842,6 +1922,64 @@ html body .popup-cart .cart ul li .deleteBtn {
 
 html body .popup-cart .cart ul li .deleteBtn:hover {
   background-color: #FC7753;
+}
+
+html body .popup-cart .cart ul li .quantityInputDiv {
+  width: 60px;
+  position: relative;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  align-items: center;
+}
+
+html body .popup-cart .cart ul li .quantityInputDiv button {
+  background-color: transparent;
+  color: #403D58;
+  padding: 0;
+  position: absolute;
+  height: 50%;
+  right: 5px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-transition: .24s ease-in-out;
+  transition: .24s ease-in-out;
+}
+
+html body .popup-cart .cart ul li .quantityInputDiv button:nth-of-type(1) {
+  top: 0;
+}
+
+html body .popup-cart .cart ul li .quantityInputDiv button:nth-of-type(2) {
+  bottom: 0;
+}
+
+html body .popup-cart .cart ul li .quantityInputDiv button i {
+  font-size: 1rem;
+}
+
+html body .popup-cart .cart ul li .quantityInputDiv button:hover {
+  color: #2D3047;
 }
 
 html body .popup-cart .cart #buyBtn {
@@ -3158,8 +3296,11 @@ html body .popupForm .content #closeBtn:hover {
     font-size: .9rem;
   }
   html body .popup-cart .cart ul li input {
-    width: 35px;
+    width: 100%;
     font-size: .9rem;
+  }
+  html body .popup-cart .cart ul li .quantityInputDiv {
+    width: 50px;
   }
   html body .popup-cart .cart ul li .deleteBtn {
     font-size: .9rem;

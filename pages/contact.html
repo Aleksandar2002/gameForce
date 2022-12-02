@@ -12,8 +12,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/material-design-iconic-font/2.2.0/css/material-design-iconic-font.min.css"/>
     <link rel="preconnect" href="https://fonts.googleapis.com"/>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
     <link href="https://fonts.googleapis.com/css2?family=Barlow&family=Noto+Sans:wght@300;400&display=swap" rel="stylesheet"/>
     <script src="https://kit.fontawesome.com/86efb14479.js" crossorigin="anonymous"></script>
 </head>
@@ -29,7 +29,11 @@
                 </nav>
             </div>
             <div class="col col-md-10 col-sm-10 col-10 hamburger notIndexPage">
-                <button id="hamburgerBtn"><i class="fas fa-bars"></i></button>
+                <button id="hamburgerBtn">
+                    <div></div>
+                    <div></div>
+                    <div></div>
+                </button>
             </div>
             <div class="smallNavbar">
                 <nav></nav>
@@ -78,10 +82,12 @@
                                 <div class="form-field">
                                     <input type="password" name="password" id="password"/>
                                     <label for="password">Password</label>
+                                    <button class="show"><i class="fas fa-eye"></i></button>
                                 </div>
                                 <div class="form-field">
                                     <input type="password" name="confirmPassword" id="confirmPassword"/>
                                     <label for="confirmPassword">Confirm Password</label>
+                                    <button class="show"><i class="fas fa-eye"></i></button>
                                 </div>
                                 <div class="form-field">
                                     <input type="text" name="message" id="message"/>
@@ -91,6 +97,7 @@
                                     <input type="submit" disabled="disabled"   name="sendBtn" id="sendBtn" value="Send"/>
                                     <input type="reset" name="resetBtn" id="resetBtn" value="Reset"/>
                                 </div>
+                                <!-- <p class="error formErr">Some field are empty , you need to fill all of them</p> -->
                             </form>
                         </div>
                     </div>
@@ -101,7 +108,7 @@
                     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3365.8944331501984!2d20.48063306237037!3d44.81405565043411!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x475a7a9609031735%3A0xc17ed71f59ac4725!2sICT%20College!5e0!3m2!1sen!2srs!4v1669153296484!5m2!1sen!2srs" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
                 <div class="col col-lg-5 col-md-5 col-sm-12 col-12">
-                    <h3>Here you can see the </br>location of our stores </h3>
+                    <h3>Here you can see the <br/>location of our stores </h3>
                 </div>
             </div>
         </div>
