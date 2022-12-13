@@ -47,6 +47,7 @@ html{
         background-color: #6a6a88;
         position: relative;
         color: $white;
+        scroll-behavior: smooth;
         ::placeholder {
             color: $darkBlue;
             opacity: .8;
@@ -246,12 +247,15 @@ html{
                         width: 100%;
                         min-height: 500px;
                         height: calc(100vh - 2 * 40px - 41px);
-                        background-image: url("img/slider/slideImg1.jpg");
                         background-repeat: no-repeat;
                         background-position: center;
                         background-size: cover;
                         position: absolute;
                         z-index: 1;
+                        display: none;
+                        &.active{
+                            display: block;
+                        }
                         &.animate{
                             transition: .64s ease-in-out;
                         }
@@ -648,6 +652,37 @@ html{
                         }
                     }
                 }
+                .our-business-history{
+                    width: 100%;
+                    background-color:$blue;
+                    height: 235px;
+                    @include flexbox();
+                    .wrapper{
+                        background-color: transparent;
+                        box-shadow: none;
+                        min-height: auto;
+                        @include flexbox();
+                        justify-content: space-between;
+                        padding:0;
+                        .col{
+                            height: 100%;
+                            @include flexcol();
+                            font-family: 'Barlow', sans-serif;
+                            h2,  h4{
+                                margin: 0;
+                            }
+                            h2{
+                                font-size: 2.4rem;
+                                margin-bottom: 10px;
+                                color: $darkBlue;
+                            }
+                            h4{
+                                color: $black;
+                                font-size: 1.5rem;
+                            }
+                        }
+                    }
+                }
                 .service-information{
                     @include flexcol();
                     min-height: 400px;
@@ -814,7 +849,7 @@ html{
                                         font-size: .7rem;
                                     }
                                     width: 45%;
-                                    input, textarea{
+                                    input[type="text"],input[type="password"], textarea{
                                         background-color: transparent;
                                         border: none;
                                         outline: none;
@@ -868,6 +903,9 @@ html{
                                     .buttons{
                                         @include flexbox();
                                     }
+                                    .goUp{
+                                        top: -15px;
+                                    }
                                     label{
                                         font-size: .78rem;
                                         color: $blue;
@@ -878,8 +916,34 @@ html{
                                         @include transition2();
                                         cursor: text;
                                     }
-                                    .goUp{
-                                        top: -15px;
+                                    .form-field-radio , .form-checkbox{
+                                        margin-bottom: 20px;
+                                        @include flexbox();
+                                        .radio{
+                                            margin: 0 10px;
+                                            @include flexbox();
+                                            justify-content: space-between;
+                                        }
+
+                                        label{
+                                            left: 0;
+                                            top: 0;
+                                            margin-left: 10px;
+                                            cursor: default;
+                                            position:relative;
+                                        }
+                                    }
+                                    .form-checkbox{
+                                        .check{
+                                            @include flexbox();
+                                            input{
+                                                width: auto;
+                                                margin-left: 24px;
+                                            }
+                                            label{
+                                                text-align: center;
+                                            }
+                                        }
                                     }
                                 }
                                 p{
@@ -934,6 +998,43 @@ html{
                             }
                             &:hover::before{
                                 width: 0;
+                            }
+                        }
+                    }
+                }
+                .gallery{
+                    border-radius: 5px;
+                    margin:50px auto ;
+                    h1{
+                        font-size: 2.45rem;
+                        color: $orange;
+                        text-align: center;
+                        margin-bottom: 60px;
+                    }
+                    .gallery-image-grid{
+                        padding-bottom: 75px;
+                        display: grid;
+                        justify-content: center;
+                        grid-template-columns: .7fr .7fr;
+                        grid-column-gap: 60px;
+                        grid-row-gap: 80px;
+                        .image-box{
+                            position: relative;
+                            cursor: pointer;
+                            img{
+                                border-radius: 7px;
+                                width: 100%;
+                                height: 330px;
+                            }
+                            .layer{
+                                border-radius: 7px;
+                                width: 100%;
+                                height: 100%;
+                                background-color: rgba(82, 195, 189, 0.66);
+                                backdrop-filter: blur(1px);
+                                position: absolute;
+                                top: 0;
+                                left: 0;
                             }
                         }
                     }
@@ -1480,6 +1581,27 @@ html{
                     &:hover{
                         color: $blue;
                     }
+                }
+            }
+        }
+        .to-top{
+            position: fixed;
+            right: 2%;
+            bottom: 4%;
+            @include flexbox();
+            justify-content: center;
+            padding: 0;
+            button{
+                padding: 0;
+                @include flexbox();
+                justify-content: center;
+                background-color: transparent;
+                color: $orange;
+                padding: 0;
+                @include transition();
+                font-size: 3rem;
+                &:hover{
+                    color: $blue;
                 }
             }
         }

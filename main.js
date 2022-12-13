@@ -18,62 +18,6 @@ window.addEventListener('scroll' , ()=>{
     header.classList.remove('semi-transparent');
 });
 
-// CHANGE SLIDER IMAGE
-let previousBtn = document.querySelector('#previousBtn');
-let nextBtn = document.querySelector('#nextBtn');
-let slideImages = document.querySelectorAll('.slide');
-
-slideImages.forEach((slide , index) =>{
-    slide.style.transform = `translateX(${index * 100}%)`;
-    slide.style.backgroundImage = `url("assets/img/slider/slideImg${index+1}.jpg")`;
-})
-let currentImage = minSlide = maxSlide = previousImage = 0;
-maxSlide = slideImages.length-1;
-
-if(previousBtn){
-    previousBtn.addEventListener('click', ()=>{
-        if(currentImage === minSlide){
-            currentImage = maxSlide;
-        }else{
-            currentImage--;
-        }
-        slideImages.forEach((slide, index) =>{
-            slide.style.transform = `translateX(${100 * (index - currentImage)}%)`;
-            slide.classList.add('animate');
-        })
-    })
-    nextBtn.addEventListener('click', ()=>{
-        previousImage = currentImage;
-        if(currentImage === maxSlide){
-            currentImage = 0;
-        }else{
-            currentImage++;
-        }
-        slideImages.forEach((slide, index) =>{
-            if(index === 1){
-                slide.classList.add('first-visible')
-            }
-            slide.style.transform = `translateX(${100 * (index - currentImage)}%)`;
-            slide.classList.add('animate');
-        })
-    })
-    let slideInterval  = setInterval(()=>{
-        previousImage = currentImage;
-        if(currentImage === maxSlide){
-            currentImage = 0;
-        }else{
-            currentImage++;
-        }
-        slideImages.forEach((slide, index) =>{
-            if(index === 1){
-                slide.classList.add('first-visible')
-            }
-            slide.style.transform = `translateX(${100 * (index - currentImage)}%)`;
-            slide.classList.add('animate');
-        })
-    },20000)
-}
-
 let currentPage = window.location.href;
 currentPage = currentPage.substring(currentPage.lastIndexOf('/')+1);
 
@@ -275,6 +219,7 @@ if(currentPage === 'index'){
 
     })
 
+
     // FUNCTIONS
     function Product(name , src , price ,type){
         this.name = name;
@@ -388,12 +333,15 @@ if(currentPage === 'index'){
     
         // CREATING ELEMENTS AND ADDING THEIR ATTRIBUTES
         let li = document.createElement('li');
+        
         let p1 = document.createElement('p');
         p1.textContent = name;
         p1.setAttribute('data-content' , 'productName');
+
         let p2 = document.createElement('p');
         p2.textContent = price;
         p2.setAttribute('data-content' , 'price')
+        
         let input = document.createElement('input');
         input.setAttribute('type' , 'number');
         input.classList.add('quantity')
@@ -403,6 +351,7 @@ if(currentPage === 'index'){
         input.setAttribute('max' , '20');
         input.setAttribute('onkeydown' , 'return false');
         // input.setAttribute('onchange', 'changeProductsNumberAndPriceInCartList(event)');
+
         let button = document.createElement('button');
         button.innerHTML = '<i class="fas fa-trash"></i>';
         button.classList.add('deleteBtn');
@@ -410,10 +359,12 @@ if(currentPage === 'index'){
 
         let inputDiv = document.createElement('div')
         inputDiv.classList.add('quantityInputDiv');
+
         let buttonAdd = document.createElement('button');
         buttonAdd.classList.add('increment');
         buttonAdd.innerHTML = '<i class="fas fa-caret-up"></i>';
         buttonAdd.setAttribute('onclick' , 'incrementCartInput(event)');
+        
         let buttonSubstract = document.createElement('button');
         buttonSubstract.classList.add('decrement');
         buttonSubstract.innerHTML = '<i class="fas fa-caret-down"></i>'
@@ -459,7 +410,8 @@ if(currentPage === 'index'){
         // ENABLE ADD TO CART BUTTON AND REMOVE CLASS
         let allArticlesInProductSection = sectionProducts.querySelectorAll('.product');
         allArticlesInProductSection = Array.from(allArticlesInProductSection);
-    
+
+        
         let articleWithSameProdAsDeletedProd = allArticlesInProductSection.find(article =>{
             let prodName = article.querySelector('.product-name').textContent;
             if(prodName === deletedProductName)return article;
@@ -469,6 +421,7 @@ if(currentPage === 'index'){
             let addToCartBtn = articleWithSameProdAsDeletedProd.querySelector('.addToCart');
             enableAddToCartBtn(addToCartBtn);
         }
+
     }
     function updateShoppingCartInterface(){
         popupCart.querySelector('.totalPrice').textContent = '$'+totalPrice;
@@ -561,6 +514,7 @@ if(currentPage === 'index'){
         parentDiv.querySelector('.quantity').value = quantValue;
         changeProductsNumberAndPriceInCartList();
     }
+
 }
 if(currentPage === 'services'){
     const ourServicesDivs = document.querySelectorAll('.our-services .service');
@@ -789,13 +743,21 @@ if(currentPage === 'contact'){
                 }
             }
             showErrors();
-            let spans = document.querySelectorAll('.contact-form form span');
-            if(!isNotEmpty() || spans.length > 0 ){
-                submitBtn.setAttribute('disabled' , 'disabled');
-            }else{
-                submitBtn.removeAttribute('disabled');
-            }
+            checkIfFormIsReadyForSubmit();
         })
+    })
+
+    // CHECK IF CHECKBOX IS CHECKED
+    let checkTerms = document.querySelector('#terms');
+    let check = 0;
+    checkTerms.addEventListener('change' , ()=>{
+        let isChecked = document.querySelector('#terms').checked;
+        if(!isChecked){
+            check = 0;
+        }else{
+            check = 1;
+        }
+        checkIfFormIsReadyForSubmit();
     })
 
     let submitBtn = document.querySelector('[name="sendBtn"]');
@@ -806,8 +768,17 @@ if(currentPage === 'contact'){
         document.querySelectorAll('label').forEach(label =>{
             label.classList.remove('goUp');
         })
+        submitBtn.setAttribute('disabled', 'disabled')
     })
-
+    let resetBtn = document.querySelector('#resetBtn');
+    resetBtn.addEventListener('click' ,  ()=>{
+        document.querySelectorAll('.error').forEach(error=>{
+            error.remove();
+        })
+        document.querySelectorAll('label').forEach(label =>{
+            label.classList.remove('goUp');
+        })
+    })
     let okBtn = document.querySelector('.popupForm #okBtn');
     okBtn.addEventListener('click' , hideFormModal);
 
@@ -883,6 +854,14 @@ if(currentPage === 'contact'){
         document.querySelector('.change-section .active').classList.remove('active');
         current.classList.add('active');
     }
+    function checkIfFormIsReadyForSubmit(){
+        let spans = document.querySelectorAll('.contact-form form span');
+        if(!isNotEmpty() || spans.length > 0 || !check){
+            submitBtn.setAttribute('disabled' , 'disabled');
+        }else{
+            submitBtn.removeAttribute('disabled');
+        }
+    }
 }
 if(currentPage === 'aboutus'){
     let ourOfficeDiv = document.querySelector('.our-office');
@@ -932,10 +911,27 @@ if(currentPage === 'aboutus'){
         })
     })
 }
+if(currentPage === 'gallery'){
+    let galleryImageGrid = document.querySelector('.gallery-image-grid');
+    for(let i= 1; i< 7 ; i++){
+        let imageBox = document.createElement('div');
+        imageBox.classList.add('image-box');
+        
+        let img = document.createElement('img');
+        img.setAttribute('src' , `../assets/img/gallery/gal${i}.jpg`);
+        img.setAttribute('alt' , 'gal'+i);
+        
+        let div = document.createElement('div');
+        div.classList.add('layer')
+        imageBox.appendChild(img)
+        imageBox.appendChild(div)
+        galleryImageGrid.appendChild(imageBox);
+    }
+}  
 
 // CREATE HEADER NAV LIST
 const headerNavbar = document.querySelector('header .navbar nav');
-let navLinks = new Array('Home' , 'Services' , 'Contact' , 'About us' , 'Author');
+let navLinks = new Array('Home' , 'Services' , 'Contact' ,'Gallery', 'About us' , 'Author');
 createNavList(headerNavbar);
 
 // CREATE FOOTER NAV LIST

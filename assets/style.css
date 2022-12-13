@@ -3,6 +3,7 @@ html body {
   background-color: #6a6a88;
   position: relative;
   color: #F2EFEA;
+  scroll-behavior: smooth;
 }
 
 html body ::-webkit-input-placeholder {
@@ -348,12 +349,16 @@ html body .main .container-fluid .slider .col {
   width: 100%;
   min-height: 500px;
   height: calc(100vh - 2 * 40px - 41px);
-  background-image: url("img/slider/slideImg1.jpg");
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   position: absolute;
   z-index: 1;
+  display: none;
+}
+
+html body .main .container-fluid .slider .col.active {
+  display: block;
 }
 
 html body .main .container-fluid .slider .col.animate {
@@ -927,6 +932,74 @@ html body .main .container-fluid .our-services .smaller-block .text-content {
   display: none;
 }
 
+html body .main .container-fluid .our-business-history {
+  width: 100%;
+  background-color: #66D7D1;
+  height: 235px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+html body .main .container-fluid .our-business-history .wrapper {
+  background-color: transparent;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  min-height: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 0;
+}
+
+html body .main .container-fluid .our-business-history .wrapper .col {
+  height: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  font-family: 'Barlow', sans-serif;
+}
+
+html body .main .container-fluid .our-business-history .wrapper .col h2, html body .main .container-fluid .our-business-history .wrapper .col h4 {
+  margin: 0;
+}
+
+html body .main .container-fluid .our-business-history .wrapper .col h2 {
+  font-size: 2.4rem;
+  margin-bottom: 10px;
+  color: #403D58;
+}
+
+html body .main .container-fluid .our-business-history .wrapper .col h4 {
+  color: #2D3047;
+  font-size: 1.5rem;
+}
+
 html body .main .container-fluid .service-information {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1208,7 +1281,7 @@ html body .main .container-fluid .contact .col .info-form .contact-form form spa
   font-size: .7rem;
 }
 
-html body .main .container-fluid .contact .col .info-form .contact-form form input, html body .main .container-fluid .contact .col .info-form .contact-form form textarea {
+html body .main .container-fluid .contact .col .info-form .contact-form form input[type="text"], html body .main .container-fluid .contact .col .info-form .contact-form form input[type="password"], html body .main .container-fluid .contact .col .info-form .contact-form form textarea {
   background-color: transparent;
   border: none;
   outline: none;
@@ -1221,7 +1294,7 @@ html body .main .container-fluid .contact .col .info-form .contact-form form inp
   transition: .3s ease-in-out;
 }
 
-html body .main .container-fluid .contact .col .info-form .contact-form form input.error, html body .main .container-fluid .contact .col .info-form .contact-form form textarea.error {
+html body .main .container-fluid .contact .col .info-form .contact-form form input[type="text"].error, html body .main .container-fluid .contact .col .info-form .contact-form form input[type="password"].error, html body .main .container-fluid .contact .col .info-form .contact-form form textarea.error {
   border-bottom: 1px solid #f34b4b;
 }
 
@@ -1283,6 +1356,10 @@ html body .main .container-fluid .contact .col .info-form .contact-form form .bu
           align-items: center;
 }
 
+html body .main .container-fluid .contact .col .info-form .contact-form form .goUp {
+  top: -15px;
+}
+
 html body .main .container-fluid .contact .col .info-form .contact-form form label {
   font-size: .78rem;
   color: #66D7D1;
@@ -1295,8 +1372,62 @@ html body .main .container-fluid .contact .col .info-form .contact-form form lab
   cursor: text;
 }
 
-html body .main .container-fluid .contact .col .info-form .contact-form form .goUp {
-  top: -15px;
+html body .main .container-fluid .contact .col .info-form .contact-form form .form-field-radio, html body .main .container-fluid .contact .col .info-form .contact-form form .form-checkbox {
+  margin-bottom: 20px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+html body .main .container-fluid .contact .col .info-form .contact-form form .form-field-radio .radio, html body .main .container-fluid .contact .col .info-form .contact-form form .form-checkbox .radio {
+  margin: 0 10px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+html body .main .container-fluid .contact .col .info-form .contact-form form .form-field-radio label, html body .main .container-fluid .contact .col .info-form .contact-form form .form-checkbox label {
+  left: 0;
+  top: 0;
+  margin-left: 10px;
+  cursor: default;
+  position: relative;
+}
+
+html body .main .container-fluid .contact .col .info-form .contact-form form .form-checkbox .check {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+html body .main .container-fluid .contact .col .info-form .contact-form form .form-checkbox .check input {
+  width: auto;
+  margin-left: 24px;
+}
+
+html body .main .container-fluid .contact .col .info-form .contact-form form .form-checkbox .check label {
+  text-align: center;
 }
 
 html body .main .container-fluid .contact .col .info-form .contact-form p {
@@ -1373,6 +1504,54 @@ html body .main .container-fluid .google-map .col:first-child::before {
 
 html body .main .container-fluid .google-map .col:first-child:hover::before {
   width: 0;
+}
+
+html body .main .container-fluid .gallery {
+  border-radius: 5px;
+  margin: 50px auto;
+}
+
+html body .main .container-fluid .gallery h1 {
+  font-size: 2.45rem;
+  color: #FC7753;
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+html body .main .container-fluid .gallery .gallery-image-grid {
+  padding-bottom: 75px;
+  display: -ms-grid;
+  display: grid;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-grid-columns: .7fr .7fr;
+      grid-template-columns: .7fr .7fr;
+  grid-column-gap: 60px;
+  grid-row-gap: 80px;
+}
+
+html body .main .container-fluid .gallery .gallery-image-grid .image-box {
+  position: relative;
+  cursor: pointer;
+}
+
+html body .main .container-fluid .gallery .gallery-image-grid .image-box img {
+  border-radius: 7px;
+  width: 100%;
+  height: 330px;
+}
+
+html body .main .container-fluid .gallery .gallery-image-grid .image-box .layer {
+  border-radius: 7px;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(82, 195, 189, 0.66);
+  -webkit-backdrop-filter: blur(1px);
+          backdrop-filter: blur(1px);
+  position: absolute;
+  top: 0;
+  left: 0;
 }
 
 html body .main .container-fluid .about-us {
@@ -2204,6 +2383,47 @@ html body .popupForm .content #closeBtn {
 }
 
 html body .popupForm .content #closeBtn:hover {
+  color: #66D7D1;
+}
+
+html body .to-top {
+  position: fixed;
+  right: 2%;
+  bottom: 4%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+html body .to-top button {
+  padding: 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  color: #FC7753;
+  padding: 0;
+  -webkit-transition: .35s ease-in-out;
+  transition: .35s ease-in-out;
+  font-size: 3rem;
+}
+
+html body .to-top button:hover {
   color: #66D7D1;
 }
 

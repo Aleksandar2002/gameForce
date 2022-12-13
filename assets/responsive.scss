@@ -379,6 +379,28 @@
                             font-size: 1.5rem;
                         }
                     }
+                    .our-business-history{
+                        height: auto;
+                        .wrapper{
+                            .col{
+                                height: 100%;
+                                &:first-child h2{
+                                    margin-top: 50px;
+                                }
+                                &:last-child h4{
+                                    margin-bottom: 50px;
+                                }
+                                h2{
+                                    font-size: 2.1rem;
+                                    margin-bottom: 10px;
+                                }
+                                h4{
+                                    margin-bottom: 20px;
+                                    font-size: 1.4rem;
+                                }
+                            }
+                        }
+                    }
                     .contact{
                         margin: 0;
                         margin-top: 50px;
@@ -502,9 +524,9 @@
                         z-index: 100;
                         position: absolute;
                         width: 0px;
-                        height: 170px;
+                        height: 200px;
                         right: 0px;
-                        bottom: -170px;
+                        bottom: -200px;
                         padding: 20px 0;
                         border-radius: 4px;
                         box-shadow: 0 0 5px $black;
@@ -576,6 +598,23 @@
                                 }
                                 a{
                                     font-size: .95rem;
+                                }
+                            }
+                        }
+                    }
+                    .gallery{
+                        h1{
+                            font-size: 2.25rem;
+                            margin-bottom: 80px;
+                        }
+                        .gallery-image-grid{
+                            grid-template-columns: .7fr;
+                            grid-row-gap: 60px;
+                            .image-box{
+                                position: relative;
+                                cursor: pointer;
+                                img{
+                                    height: 350px;
                                 }
                             }
                         }
