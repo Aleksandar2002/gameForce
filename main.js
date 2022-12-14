@@ -912,7 +912,10 @@ if(currentPage === 'aboutus'){
     })
 }
 if(currentPage === 'gallery'){
+
     let galleryImageGrid = document.querySelector('.gallery-image-grid');
+    let titles = new Array('Gaming equipment' , 'League of Legends', 'Programming equipment' , 'Gaming house' , 'Home configuration' ,'Consoles')
+
     for(let i= 1; i< 7 ; i++){
         let imageBox = document.createElement('div');
         imageBox.classList.add('image-box');
@@ -920,10 +923,10 @@ if(currentPage === 'gallery'){
         let img = document.createElement('img');
         img.setAttribute('src' , `../assets/img/gallery/gal${i}.jpg`);
         img.setAttribute('alt' , 'gal'+i);
+        img.setAttribute('title' , `${titles[i-1]}`);
 
         let a = document.createElement('a');
         a.setAttribute('href' , `../assets/img/gallery/gal${i}.jpg`);
-        a.setAttribute('rel' , `rel${i}`);
         
         let div = document.createElement('div');
         div.classList.add('layer')

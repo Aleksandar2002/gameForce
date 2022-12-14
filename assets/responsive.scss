@@ -1024,6 +1024,18 @@
                         }
                         
                     }
+                    .image-gallery{
+                        .gallery-image-grid{
+                            grid-template-columns: .9fr;
+                            grid-row-gap: 60px;
+                            .image-box{
+                                position: relative;
+                                img{
+                                    height: 270px;
+                                }
+                            }
+                        }
+                    }
                 }
             }
             .footer{

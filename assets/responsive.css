@@ -1556,6 +1556,7 @@ html body .main .container-fluid .image-gallery .gallery-image-grid .image-box .
   position: absolute;
   top: 0;
   left: 0;
+  display: none;
 }
 
 html body .main .container-fluid .about-us {
@@ -3469,6 +3470,17 @@ html body .to-top button:hover {
   }
   html body .main .container-fluid .contact .col .info-form .contact-form form .form-field {
     margin: 20px 0;
+  }
+  html body .main .container-fluid .image-gallery .gallery-image-grid {
+    -ms-grid-columns: .9fr;
+        grid-template-columns: .9fr;
+    grid-row-gap: 60px;
+  }
+  html body .main .container-fluid .image-gallery .gallery-image-grid .image-box {
+    position: relative;
+  }
+  html body .main .container-fluid .image-gallery .gallery-image-grid .image-box img {
+    height: 270px;
   }
   html body .footer {
     padding: 15px 0 30px 0;
