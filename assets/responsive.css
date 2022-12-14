@@ -1506,19 +1506,19 @@ html body .main .container-fluid .google-map .col:first-child:hover::before {
   width: 0;
 }
 
-html body .main .container-fluid .gallery {
+html body .main .container-fluid .image-gallery {
   border-radius: 5px;
   margin: 50px auto;
 }
 
-html body .main .container-fluid .gallery h1 {
+html body .main .container-fluid .image-gallery h1 {
   font-size: 2.45rem;
   color: #FC7753;
   text-align: center;
   margin-bottom: 60px;
 }
 
-html body .main .container-fluid .gallery .gallery-image-grid {
+html body .main .container-fluid .image-gallery .gallery-image-grid {
   padding-bottom: 75px;
   display: -ms-grid;
   display: grid;
@@ -1531,18 +1531,22 @@ html body .main .container-fluid .gallery .gallery-image-grid {
   grid-row-gap: 80px;
 }
 
-html body .main .container-fluid .gallery .gallery-image-grid .image-box {
+html body .main .container-fluid .image-gallery .gallery-image-grid .image-box {
   position: relative;
-  cursor: pointer;
 }
 
-html body .main .container-fluid .gallery .gallery-image-grid .image-box img {
+html body .main .container-fluid .image-gallery .gallery-image-grid .image-box a {
+  width: 100%;
+  height: 330px !important;
+}
+
+html body .main .container-fluid .image-gallery .gallery-image-grid .image-box img {
   border-radius: 7px;
   width: 100%;
   height: 330px;
 }
 
-html body .main .container-fluid .gallery .gallery-image-grid .image-box .layer {
+html body .main .container-fluid .image-gallery .gallery-image-grid .image-box .layer {
   border-radius: 7px;
   width: 100%;
   height: 100%;
@@ -1800,6 +1804,12 @@ html body .main .container-fluid .author .col h1 {
 
 html body .main .container-fluid .author .col p {
   line-height: 1.7rem;
+}
+
+html body .main .container-fluid .author .col p.name {
+  color: #FC7753;
+  font-size: 1.2rem;
+  margin-bottom: 40px;
 }
 
 html body .main .container-fluid .author .col a {
@@ -3038,20 +3048,19 @@ html body .to-top button:hover {
   html body .main .container-fluid .our-services .biggest-block .text-content a {
     font-size: .95rem;
   }
-  html body .main .container-fluid .gallery h1 {
+  html body .main .container-fluid .image-gallery h1 {
     font-size: 2.25rem;
     margin-bottom: 80px;
   }
-  html body .main .container-fluid .gallery .gallery-image-grid {
+  html body .main .container-fluid .image-gallery .gallery-image-grid {
     -ms-grid-columns: .7fr;
         grid-template-columns: .7fr;
     grid-row-gap: 60px;
   }
-  html body .main .container-fluid .gallery .gallery-image-grid .image-box {
+  html body .main .container-fluid .image-gallery .gallery-image-grid .image-box {
     position: relative;
-    cursor: pointer;
   }
-  html body .main .container-fluid .gallery .gallery-image-grid .image-box img {
+  html body .main .container-fluid .image-gallery .gallery-image-grid .image-box img {
     height: 350px;
   }
   html body .main .container-fluid .our-office {

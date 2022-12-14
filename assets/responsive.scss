@@ -602,7 +602,7 @@
                             }
                         }
                     }
-                    .gallery{
+                    .image-gallery{
                         h1{
                             font-size: 2.25rem;
                             margin-bottom: 80px;
@@ -612,7 +612,6 @@
                             grid-row-gap: 60px;
                             .image-box{
                                 position: relative;
-                                cursor: pointer;
                                 img{
                                     height: 350px;
                                 }

@@ -920,12 +920,17 @@ if(currentPage === 'gallery'){
         let img = document.createElement('img');
         img.setAttribute('src' , `../assets/img/gallery/gal${i}.jpg`);
         img.setAttribute('alt' , 'gal'+i);
+
+        let a = document.createElement('a');
+        a.setAttribute('href' , `../assets/img/gallery/gal${i}.jpg`);
+        a.setAttribute('rel' , `rel${i}`);
         
         let div = document.createElement('div');
         div.classList.add('layer')
         imageBox.appendChild(img)
         imageBox.appendChild(div)
-        galleryImageGrid.appendChild(imageBox);
+        a.appendChild(imageBox);
+        galleryImageGrid.appendChild(a);
     }
 }  
 
