@@ -41,27 +41,27 @@ $(document).ready(function(){
             }
         );
     })
-    if($('.gallery a').length){
-        $('.popup-gallery').magnificPopup({
-            removalDelay: 300,
-            delegate: 'a',
-            mainClass: 'mfp-fade',
-            type: 'image',
-            tLoading: 'Loading image #%curr%...',
-            mainClass: 'mfp-img-mobile',
-            gallery: {
-                enabled: true,
-                navigateByImgClick: true,
-                preload: [0,1] // Will preload 0 - before current, and 1 after the current image
-            },
-            image: {
-                tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
-                titleSrc: function(item) {
-                    return item.el[0].querySelector('img').title ;
-                }
-            }
-        });
-    }
+    // if($('.gallery a').length){
+    //     $('.popup-gallery').magnificPopup({
+    //         removalDelay: 300,
+    //         delegate: 'a',
+    //         mainClass: 'mfp-fade',
+    //         type: 'image',
+    //         tLoading: 'Loading image #%curr%...',
+    //         mainClass: 'mfp-img-mobile',
+    //         gallery: {
+    //             enabled: true,
+    //             navigateByImgClick: true,
+    //             preload: [0,1] // Will preload 0 - before current, and 1 after the current image
+    //         },
+    //         image: {
+    //             tError: '<a href="%url%">The image #%curr%</a> could not be loaded.',
+    //             titleSrc: function(item) {
+    //                 return item.el[0].querySelector('img').title ;
+    //             }
+    //         }
+    //     });
+    // }
 
     // SLIDER IMAGES
     $('.slide').each(function(ind){
